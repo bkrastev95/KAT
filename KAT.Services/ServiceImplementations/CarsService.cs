@@ -15,7 +15,9 @@
 
             // fetch all cars with appropriate command
 
-            return new List<Car>();
+            var car = new Car { RegNumber = "you made it!" };
+
+            return new List<Car>{ car };
         }
 
         public Car GetCarById()
