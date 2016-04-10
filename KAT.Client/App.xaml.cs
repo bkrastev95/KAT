@@ -15,6 +15,7 @@
             base.OnStartup(e);
             NinjectConfig.ConfigureContainer();
             NinjectConfig.ComposeObjects(Current);
+            
             Current.MainWindow.Show();
         }
     }

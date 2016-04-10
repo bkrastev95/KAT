@@ -4,6 +4,7 @@
     using System.Windows;
 
     using Services.ServiceInterfaces;
+    using KAT.Client.Views;
 
 
     /// <summary>
@@ -17,14 +18,15 @@
         {
             this.carsService = carsService;
             InitializeComponent();
-
+            LoginPage loginPage = new LoginPage();
+            LayoutFrame.Navigate(loginPage);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var car = carsService.GetAllCars();
 
-            myButton.Content = car.FirstOrDefault().RegNumber;
+            //myButton.Content = car.FirstOrDefault().RegNumber;
         }
     }
 }

@@ -22,7 +22,6 @@
         public static void ComposeObjects(Application current)
         {
             current.MainWindow = container.Get<MainWindow>();
-            current.MainWindow.Title = "DI with Ninject";
         }
     }
 }
