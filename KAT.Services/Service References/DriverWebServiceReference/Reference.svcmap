@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9e6de660-bbfe-4920-9773-79c6333961f3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9097/Driver/DriverWebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DriverWebService.xsd" MetadataType="Schema" ID="186b9a05-df37-4430-a832-bdd41c3702ae" SourceId="1" SourceUrl="http://localhost:9097/Driver/DriverWebService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DriverWebService1.xsd" MetadataType="Schema" ID="d1a0df00-f964-4944-a6be-fd11313f6f3b" SourceId="1" SourceUrl="http://localhost:9097/Driver/DriverWebService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DriverWebService2.xsd" MetadataType="Schema" ID="5db28cd1-96de-4a1c-ac6a-425495c0b03d" SourceId="1" SourceUrl="http://localhost:9097/Driver/DriverWebService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DriverWebService.disco" MetadataType="Disco" ID="490a83ff-e04c-430c-a1ab-96596016c861" SourceId="1" SourceUrl="http://localhost:9097/Driver/DriverWebService.svc?disco" />
+    <MetadataFile FileName="DriverWebService.wsdl" MetadataType="Wsdl" ID="e8da2919-7143-4b7b-a27d-b54c54e2e156" SourceId="1" SourceUrl="http://localhost:9097/Driver/DriverWebService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

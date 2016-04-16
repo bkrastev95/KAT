@@ -111,7 +111,7 @@
                 <Button Grid.Row="3"
                     Content="Влез"
                         Width="120"
-                    Style="{StaticResource BlueButtonYellowText}"/>
+                    Style="{StaticResource BlueButtonYellowText}" Click="Button_Click"/>
             </Grid>            
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

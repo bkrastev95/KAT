@@ -107,6 +107,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KAT.IServices\KAT.IServices.csproj">
+      <Project>{11612374-22DF-4E65-A03E-11DCDB42734C}</Project>
+      <Name>KAT.IServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KAT.Models\KAT.Models.csproj">
       <Project>{1E134C4E-4D94-4520-B10C-5AAC5E497D8F}</Project>
       <Name>KAT.Models</Name>

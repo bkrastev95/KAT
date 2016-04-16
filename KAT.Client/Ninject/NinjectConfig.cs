@@ -1,11 +1,11 @@
-﻿namespace KAT.Client.Ninject
+﻿using KAT.IServices;
+using KAT.Services.Implementations;
+
+namespace KAT.Client.Ninject
 {
     using System.Windows;
 
     using global::Ninject;
-
-    using Services.ServiceImplementations;
-    using Services.ServiceInterfaces;
 
 
     public static class NinjectConfig

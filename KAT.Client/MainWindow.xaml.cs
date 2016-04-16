@@ -1,10 +1,9 @@
-﻿namespace KAT.Client
-{
-    using System.Linq;
-    using System.Windows;
+﻿using KAT.IServices;
 
-    using Services.ServiceInterfaces;
-    using KAT.Client.Views;
+namespace KAT.Client
+{
+    using System.Windows;
+    using Views;
 
 
     /// <summary>
@@ -12,21 +11,11 @@
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ICarsService carsService;
-
-        public MainWindow(ICarsService carsService)
+        public MainWindow(IDriversService driversService)
         {
-            this.carsService = carsService;
             InitializeComponent();
-            LoginPage loginPage = new LoginPage();
+            LoginPage loginPage = new LoginPage(driversService);
             LayoutFrame.Navigate(loginPage);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var car = carsService.GetAllCars();
-
-            //myButton.Content = car.FirstOrDefault().RegNumber;
         }
     }
 }
