@@ -7,8 +7,8 @@
     <ProjectGuid>{7E49A459-3F0A-4186-BB77-9B6CC2EF17E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KAT.Data.Services</RootNamespace>
-    <AssemblyName>KAT.Data.Services</AssemblyName>
+    <RootNamespace>KAT.Data.IServices</RootNamespace>
+    <AssemblyName>KAT.Data.IServices</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,9 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICarService.cs" />
+    <Compile Include="IDriverService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\KAT.Web.Models\KAT.Web.Models.csproj">
+      <Project>{097b4473-e50d-4a58-a155-a9b1a97271ef}</Project>
+      <Name>KAT.Web.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

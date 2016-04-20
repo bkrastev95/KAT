@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace KAT.WebService.Driver
+namespace KAT.Web.Models
 {
     [DataContract]
     public class Driver

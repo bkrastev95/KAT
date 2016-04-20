@@ -1,4 +1,8 @@
 ﻿using System;
+using KAT.Data.IServices;
+using KAT.WebService.Ninject;
+using Ninject;
+
 
 namespace KAT.WebService.Driver
 {
@@ -12,18 +16,23 @@ namespace KAT.WebService.Driver
         //    this.driverDataService = driverDataService;
         //}
 
-        public Driver GetDriver(long value)
+        public Web.Models.Driver GetDriver(long value)
         {
-            return new Driver
+            NinjectConfig.ConfigureContainer();
+            var driverService = NinjectConfig.Kernel.Get<IDriverService>();
+            var result = driverService.GetDriverById(1);
+            var testResult = new Web.Models.Driver
             {
                 FirstName = "Manolo",
                 Id = 1,
                 LastName = "Rodriguez",
                 SecondName = "Lopez"
             };
+            
+            return result;
         }
 
-        public long InsertDriver(Driver driver)
+        public long InsertDriver(Web.Models.Driver driver)
         {
             if (driver == null)
             {

@@ -9,7 +9,11 @@ namespace KAT.Data.CodeFirstModels
         [Required]
         public string Egn { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        [Required]
+        public string SecondName { get; set; }
+        [Required]
+        public string LastName { get; set; }
         public virtual ICollection<Car> Cars { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
     }

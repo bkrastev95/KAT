@@ -108,7 +108,7 @@
                     <PasswordBox Grid.Row="1"
                         Style="{StaticResource PasswordBoxBlueFontYellow}"/>
                 </Grid>
-                <Button Grid.Row="3"
+                <Button Name="MyButton"  Grid.Row="3"
                     Content="Влез"
                         Width="120"
                     Style="{StaticResource BlueButtonYellowText}" Click="Button_Click"/>

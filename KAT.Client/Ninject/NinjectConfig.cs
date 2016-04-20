@@ -10,18 +10,18 @@ namespace KAT.Client.Ninject
 
     public static class NinjectConfig
     {
-        private static IKernel container;
+        public static IKernel Kernel { get; private set; }
 
         public static void ConfigureContainer()
         {
-            container = new StandardKernel();
-            container.Bind<ICarsService>().To<CarsService>().InTransientScope();
-            container.Bind<IDriversService>().To<DriversService>().InTransientScope();
+            Kernel = new StandardKernel();
+            Kernel.Bind<ICarsService>().To<CarsService>().InTransientScope();
+            Kernel.Bind<IDriversService>().To<DriversService>().InTransientScope();
         }
 
         public static void ComposeObjects(Application current)
         {
-            current.MainWindow = container.Get<MainWindow>();
+            current.MainWindow = Kernel.Get<MainWindow>();
         }
     }
 }

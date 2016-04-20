@@ -40,6 +40,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=1.6.30117.9648, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -63,11 +68,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Driver\Driver.cs" />
     <Compile Include="Driver\DriverWebService.svc.cs">
       <DependentUpon>DriverWebService.svc</DependentUpon>
     </Compile>
     <Compile Include="Driver\IDriverWebService.cs" />
+    <Compile Include="NinjectWebCommon.cs" />
+    <Compile Include="Ninject\NinjectConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +87,20 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KAT.Data.Services\KAT.Data.IServices.csproj">
+      <Project>{7e49a459-3f0a-4186-bb77-9b6cc2ef17e2}</Project>
+      <Name>KAT.Data.IServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KAT.Data.Services\KAT.Data.Services.csproj">
+      <Project>{7a217bc4-e63a-48f8-be5d-8bc7e2e2f0a5}</Project>
+      <Name>KAT.Data.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KAT.Web.Models\KAT.Web.Models.csproj">
+      <Project>{097B4473-E50D-4A58-A155-A9B1A97271EF}</Project>
+      <Name>KAT.Web.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

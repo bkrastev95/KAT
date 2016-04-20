@@ -7,9 +7,9 @@ namespace KAT.WebService.Driver
     public interface IDriverWebService
     {
         [OperationContract]
-        Driver GetDriver(long value);
+        Web.Models.Driver GetDriver(long value);
 
         [OperationContract]
-        long InsertDriver(Driver driver);
+        long InsertDriver(Web.Models.Driver driver);
     }
 }

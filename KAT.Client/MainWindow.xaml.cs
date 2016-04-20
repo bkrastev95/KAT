@@ -1,4 +1,7 @@
-﻿using KAT.IServices;
+﻿using System;
+using KAT.Client.Ninject;
+using KAT.IServices;
+using Ninject;
 
 namespace KAT.Client
 {
@@ -11,10 +14,11 @@ namespace KAT.Client
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(IDriversService driversService)
+        public MainWindow()
         {
             InitializeComponent();
-            LoginPage loginPage = new LoginPage(driversService);
+            var driversService = NinjectConfig.Kernel.Get<IDriversService>();
+            var loginPage = new LoginPage(driversService);
             LayoutFrame.Navigate(loginPage);
         }
     }
