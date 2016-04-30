@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountService.cs" />
     <Compile Include="CarService.cs" />
     <Compile Include="DriverService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

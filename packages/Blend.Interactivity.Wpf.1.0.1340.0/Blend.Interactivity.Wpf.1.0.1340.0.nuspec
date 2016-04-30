@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Blend.Interactivity.Wpf</id>
+    <version>1.0.1340.0</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Microsoft Expression Blend 4 includes new built-in behaviors, which are reusable pieces of packaged code that can be dragged onto any object, and then fine-tuned by changing their properties.</description>
+    <summary>Microsoft Expression Blend 4 includes new built-in behaviors, which are reusable pieces of packaged code that can be dragged onto any object, and then fine-tuned by changing their properties. Behaviors allow you to add interactivity to your applications without having to write any code. The Behavior API consists of three core classes: Trigger, Action and Behavior. This SDK explores how to write each of these components, and contains a few code samples to help you get started. Programming reference topics are provided for Microsoft Silverlight. For more how-to and overview information about behaviors in Expression Blend, see the Expression Blend User Guide, available when you install Expression Blend 4.</summary>
+  </metadata>
+</package>

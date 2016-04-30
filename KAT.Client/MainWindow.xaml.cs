@@ -17,9 +17,6 @@ namespace KAT.Client
         public MainWindow()
         {
             InitializeComponent();
-            var driversService = NinjectConfig.Kernel.Get<IDriversService>();
-            var loginPage = new LoginPage(driversService);
-            LayoutFrame.Navigate(loginPage);
         }
     }
 }

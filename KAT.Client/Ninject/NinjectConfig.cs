@@ -1,4 +1,5 @@
-﻿using KAT.IServices;
+﻿using KAT.Client.Views;
+using KAT.IServices;
 using KAT.Services.Implementations;
 
 namespace KAT.Client.Ninject
@@ -17,11 +18,12 @@ namespace KAT.Client.Ninject
             Kernel = new StandardKernel();
             Kernel.Bind<ICarsService>().To<CarsService>().InTransientScope();
             Kernel.Bind<IDriversService>().To<DriversService>().InTransientScope();
+            Kernel.Bind<IAccountService>().To<AccountService>().InTransientScope();
         }
 
         public static void ComposeObjects(Application current)
         {
-            current.MainWindow = Kernel.Get<MainWindow>();
+            current.MainWindow = Kernel.Get<LoginWindow>();
         }
     }
 }

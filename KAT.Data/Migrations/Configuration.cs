@@ -7,14 +7,14 @@ namespace KAT.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<KatContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<KatDataContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(KatContext context)
+        protected override void Seed(KatDataContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="4Qu/b11f4Ro7zpcpbUczUFdqtEQ=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="/yP+slQZFtUlvyrVkzQhU19T3tA=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IDriverWebService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IDriverWebService" contract="DriverWebServiceReference.IDriverWebService" bindingType="basicHttpBinding" address="http://localhost:9097/Driver/DriverWebService.svc" bindingConfiguration="BasicHttpBinding_IDriverWebService">
+    <endpoint name="BasicHttpBinding_IDriverWebService" contract="DriverWebServiceReference.IDriverWebService" bindingType="basicHttpBinding" address="http://localhost:1980/Driver/DriverWebService.svc" bindingConfiguration="BasicHttpBinding_IDriverWebService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:9097/Driver/DriverWebService.svc</serializedValue>
+          <serializedValue>http://localhost:1980/Driver/DriverWebService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

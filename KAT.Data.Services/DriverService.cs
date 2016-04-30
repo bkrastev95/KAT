@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Data;
+using System.Linq;
 using AutoMapper;
 using KAT.Data.IServices;
 using KAT.Data.KAT.Context;
@@ -11,7 +13,7 @@ namespace KAT.Data.Services
         public long InsertDriver(Driver.Driver driver)
         {
             var dbDriver = Mapper.Map<CodeFirstModels.Driver>(driver);
-            using (var context = new KatContext())
+            using (var context = new KatDataContext())
             {
                 context.Drivers.Add(dbDriver);
                 context.SaveChanges();
@@ -23,23 +25,51 @@ namespace KAT.Data.Services
         public Driver.Driver GetDriverById(long id)
         {
             CodeFirstModels.Driver driver;
-            //var dbDriver = new CodeFirstModels.Driver
-            //{
-            //    FirstName = "Juan",
-            //    SecondName = "Lopez",
-            //    LastName = "Martinez"
-            //};
-
-            using (var db = new KatContext())
+            var dbDriver = new CodeFirstModels.Driver
             {
-                var query = from b in db.Drivers
-                            orderby b.FirstName
-                            select b;
+                Egn = "03985612",
+                FirstName = "Juan",
+                SecondName = "Lopez",
+                LastName = "Martinez"
+            };
 
-                driver = query.FirstOrDefault();
+            using (var db = new KatDataContext())
+            {
+                try
+                {
+                    var query = db.Drivers.ToList();
+
+                    driver = query.FirstOrDefault();
+                }
+                catch (DataException dataEx)
+                {
+                    return null;
+                }
+                catch (NullReferenceException nullEx)
+                {
+                    return null;
+                }
             }
 
-            return Mapper.Map<Driver.Driver>(driver);
+            try
+            {
+                var config = new MapperConfiguration(cfg =>
+                cfg.CreateMap<Driver.Driver, CodeFirstModels.Driver>());
+                var mapper = config.CreateMapper();
+                return mapper.Map<Driver.Driver>(driver);
+            }
+            catch (AutoMapperMappingException mapEx)
+            {
+                return new Driver.Driver
+                {
+                    Id = driver.Id,
+                    FirstName = driver.FirstName,
+                    SecondName = driver.SecondName,
+                    LastName = driver.LastName
+                };
+                throw;
+            }
+            
         }
     }
 }

@@ -3,9 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:KAT.Client.ViewModels"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:utilities="clr-namespace:KAT.Client.Utilities"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="LoginPage">
+    <Page.DataContext>
+        <vm:LoginViewModel></vm:LoginViewModel>
+    </Page.DataContext>
     <Page.Resources>
         <Style x:Key="BlueButtonYellowText" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="13"/>
@@ -93,8 +99,7 @@
                         Content="Потребителско име:"/>
                     <TextBox Grid.Row="1"
                         Style="{StaticResource TextBoxBlueFontYellow}"
-                        Foreground="Yellow"
-                        Background="RoyalBlue" />
+                        Text="{Binding Username}"/>
                 </Grid>
                 <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
@@ -106,12 +111,16 @@
                         Content="Парола"
                         />
                     <PasswordBox Grid.Row="1"
-                        Style="{StaticResource PasswordBoxBlueFontYellow}"/>
+                        Style="{StaticResource PasswordBoxBlueFontYellow}">
+                        <i:Interaction.Behaviors>
+                            <utilities:PasswordBoxBindingBehavior Password="{Binding Password }" />
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
                 </Grid>
                 <Button Name="MyButton"  Grid.Row="3"
                     Content="Влез"
                         Width="120"
-                    Style="{StaticResource BlueButtonYellowText}" Click="Button_Click"/>
+                    Style="{StaticResource BlueButtonYellowText}" Command="{Binding LogInCommand}"/>
             </Grid>            
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -41,9 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\AccountService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implementations\CarsService.cs" />
     <Compile Include="Implementations\DriversService.cs" />
+    <Compile Include="Service References\AccountWebServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\DriverWebServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -65,14 +74,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Service References\DriverWebServiceReference\DriverWebService.wsdl" />
-    <None Include="Service References\DriverWebServiceReference\DriverWebService.xsd">
+    <None Include="packages.config" />
+    <None Include="Service References\AccountWebServiceReference\AccountWebService.wsdl" />
+    <None Include="Service References\AccountWebServiceReference\AccountWebService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DriverWebServiceReference\DriverWebService1.xsd">
+    <None Include="Service References\AccountWebServiceReference\AccountWebService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DriverWebServiceReference\DriverWebService2.xsd">
+    <None Include="Service References\AccountWebServiceReference\AccountWebService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AccountWebServiceReference\AccountWebService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AccountWebServiceReference\KAT.Services.AccountWebServiceReference.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DriverWebServiceReference\DriverWebService1.wsdl" />
+    <None Include="Service References\DriverWebServiceReference\DriverWebService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DriverWebServiceReference\DriverWebService31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DriverWebServiceReference\DriverWebService32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\DriverWebServiceReference\KAT.Services.DriverWebServiceReference.Driver.datasource">
@@ -80,10 +106,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AccountWebServiceReference\" />
     <WCFMetadataStorage Include="Service References\DriverWebServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DriverWebServiceReference\DriverWebService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\DriverWebServiceReference\configuration91.svcinfo" />
@@ -93,6 +117,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\DriverWebServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DriverWebServiceReference\DriverWebService1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AccountWebServiceReference\AccountWebService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AccountWebServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AccountWebServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AccountWebServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

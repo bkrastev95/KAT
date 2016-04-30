@@ -30,11 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -49,13 +54,23 @@
     <Compile Include="CodeFirstModels\Nomenclatures\Rank.cs" />
     <Compile Include="CodeFirstModels\Policeman.cs" />
     <Compile Include="CodeFirstModels\Nomenclatures\Violation.cs" />
-    <Compile Include="KAT.Context\KatContext.cs" />
+    <Compile Include="CodeFirstModels\User.cs" />
+    <Compile Include="KAT.Context\KatDataContext.cs" />
+    <Compile Include="Migrations\201604300742489_add-user-table.cs" />
+    <Compile Include="Migrations\201604300742489_add-user-table.Designer.cs">
+      <DependentUpon>201604300742489_add-user-table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604300742489_add-user-table.resx">
+      <DependentUpon>201604300742489_add-user-table.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
