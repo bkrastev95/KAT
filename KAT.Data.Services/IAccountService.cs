@@ -5,6 +5,6 @@ namespace KAT.Data.IServices
 {
     public interface IAccountService
     {
-        User Login(string username, SecureString encryptedPassword);
+        User Login(string username, string encryptedPassword);
     }
 }

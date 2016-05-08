@@ -82,9 +82,6 @@
     <None Include="Service References\AccountWebServiceReference\AccountWebService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\AccountWebServiceReference\AccountWebService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\AccountWebServiceReference\AccountWebService3.xsd">
       <SubType>Designer</SubType>
     </None>

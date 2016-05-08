@@ -14,6 +14,6 @@ namespace KAT.Web.Service.Account
     public interface IAccountWebService
     {
         [OperationContract]
-        User Login(string username, SecureString password);
+        User Login(string username, string password);
     }
 }

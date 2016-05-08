@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security;
-using AutoMapper;
+﻿using System;
+using System.Data;
+using System.Linq;
 using KAT.Data.IServices;
 using KAT.Data.KAT.Context;
 using KAT.Web.Models;
@@ -10,33 +9,30 @@ namespace KAT.Data.Services
 {
     public class AccountService : IAccountService
     {
-        public User Login(string username, SecureString password)
+        public User Login(string username, string password)
         {
-            var decryptedPassword = DecryptPassword(password);
             CodeFirstModels.User user;
-            using (var db = new KatDataContext())
+
+            try
             {
-                user = db.Users.FirstOrDefault(u => u.Username == username && u.Password == decryptedPassword);
+                using (var db = new KatDataContext())
+                {
+                    user = db.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
+                }
+            }
+            catch (DataException datEx)
+            {
+                return null;
             }
 
             if (user == null) return null;
 
-            Mapper.CreateMap<User, CodeFirstModels.User>();
-            return Mapper.Map<User>(user);
-        }
-
-        private string DecryptPassword(SecureString encryptedPassword)
-        {
-            string decryptedPassword;
-            try
+            return new User
             {
-                var passwordBSTR = Marshal.SecureStringToBSTR(encryptedPassword);
-                return decryptedPassword = Marshal.PtrToStringBSTR(passwordBSTR);
-            }
-            catch
-            {
-                return decryptedPassword = "";
-            }
+                Username = user.Username,
+                IsAdmin = user.IsAdmin,
+                FullName = user.FullName
+            };
         }
     }
 }

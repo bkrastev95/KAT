@@ -23,13 +23,16 @@ namespace KAT.Services.AccountWebServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FullNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsAdminField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Security.SecureString PasswordField;
+        private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
@@ -41,6 +44,19 @@ namespace KAT.Services.AccountWebServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullName {
+            get {
+                return this.FullNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FullNameField, value) != true)) {
+                    this.FullNameField = value;
+                    this.RaisePropertyChanged("FullName");
+                }
             }
         }
         
@@ -71,7 +87,7 @@ namespace KAT.Services.AccountWebServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Security.SecureString Password {
+        public string Password {
             get {
                 return this.PasswordField;
             }
@@ -111,10 +127,10 @@ namespace KAT.Services.AccountWebServiceReference {
     public interface IAccountWebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountWebService/Login", ReplyAction="http://tempuri.org/IAccountWebService/LoginResponse")]
-        KAT.Services.AccountWebServiceReference.User Login(string username, System.Security.SecureString password);
+        KAT.Services.AccountWebServiceReference.User Login(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountWebService/Login", ReplyAction="http://tempuri.org/IAccountWebService/LoginResponse")]
-        System.Threading.Tasks.Task<KAT.Services.AccountWebServiceReference.User> LoginAsync(string username, System.Security.SecureString password);
+        System.Threading.Tasks.Task<KAT.Services.AccountWebServiceReference.User> LoginAsync(string username, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -144,11 +160,11 @@ namespace KAT.Services.AccountWebServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public KAT.Services.AccountWebServiceReference.User Login(string username, System.Security.SecureString password) {
+        public KAT.Services.AccountWebServiceReference.User Login(string username, string password) {
             return base.Channel.Login(username, password);
         }
         
-        public System.Threading.Tasks.Task<KAT.Services.AccountWebServiceReference.User> LoginAsync(string username, System.Security.SecureString password) {
+        public System.Threading.Tasks.Task<KAT.Services.AccountWebServiceReference.User> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
         }
     }

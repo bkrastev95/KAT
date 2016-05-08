@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarTypeEnum.cs" />
     <Compile Include="CodeFirstModels\Nomenclatures\Brand.cs" />
     <Compile Include="CodeFirstModels\Car.cs" />
     <Compile Include="CodeFirstModels\Nomenclatures\CarType.cs" />
@@ -55,13 +56,31 @@
     <Compile Include="CodeFirstModels\Policeman.cs" />
     <Compile Include="CodeFirstModels\Nomenclatures\Violation.cs" />
     <Compile Include="CodeFirstModels\User.cs" />
+    <Compile Include="DocumentTypeEnum.cs" />
     <Compile Include="KAT.Context\KatDataContext.cs" />
     <Compile Include="Migrations\201604300742489_add-user-table.cs" />
     <Compile Include="Migrations\201604300742489_add-user-table.Designer.cs">
       <DependentUpon>201604300742489_add-user-table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605011715480_userHasFullName.cs" />
+    <Compile Include="Migrations\201605011715480_userHasFullName.Designer.cs">
+      <DependentUpon>201605011715480_userHasFullName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605011719283_FullName is string.cs" />
+    <Compile Include="Migrations\201605011719283_FullName is string.Designer.cs">
+      <DependentUpon>201605011719283_FullName is string.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605021020212_seedAndSomeChanges.cs" />
+    <Compile Include="Migrations\201605021020212_seedAndSomeChanges.Designer.cs">
+      <DependentUpon>201605021020212_seedAndSomeChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605041801123_uniques.cs" />
+    <Compile Include="Migrations\201605041801123_uniques.Designer.cs">
+      <DependentUpon>201605041801123_uniques.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RankEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -70,6 +89,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604300742489_add-user-table.resx">
       <DependentUpon>201604300742489_add-user-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605011715480_userHasFullName.resx">
+      <DependentUpon>201605011715480_userHasFullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605011719283_FullName is string.resx">
+      <DependentUpon>201605011719283_FullName is string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605021020212_seedAndSomeChanges.resx">
+      <DependentUpon>201605021020212_seedAndSomeChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605041801123_uniques.resx">
+      <DependentUpon>201605041801123_uniques.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

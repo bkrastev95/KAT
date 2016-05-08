@@ -12,11 +12,15 @@
     <Page.DataContext>
         <vm:LoginViewModel></vm:LoginViewModel>
     </Page.DataContext>
+    <Page.InputBindings>
+        <KeyBinding Key="Enter" Command="{ Binding LogInCommand}" />
+    </Page.InputBindings>
     <Page.Resources>
         <Style x:Key="BlueButtonYellowText" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Background" Value="RoyalBlue"/>
+            <Setter Property="Background" Value="#070202"/>
             <Setter Property="Foreground" Value="Yellow"/>
             <Setter Property="Margin" Value="0,10,0,10"/>
             <Setter Property="Template">
@@ -30,17 +34,19 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="RoyalBlue"/>
+                    <Setter Property="Border.BorderThickness" Value="1,1,1,1"/>
+                    <Setter Property="Border.BorderBrush" Value="Yellow"/>
+                    <Setter Property="Background" Value="DimGray"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="TextBoxBlueFontYellow" TargetType="{x:Type TextBox}">
             <Setter Property="Foreground" Value="Yellow"/>
-            <Setter Property="Background" Value="RoyalBlue"/>
+            <Setter Property="Background" Value="DimGray"/>
         </Style>
         <Style x:Key="PasswordBoxBlueFontYellow" TargetType="{x:Type PasswordBox}">
             <Setter Property="Foreground" Value="Yellow"/>
-            <Setter Property="Background" Value="RoyalBlue"/>
+            <Setter Property="Background" Value="DimGray"/>
         </Style>
         <Style x:Key="LabelBlueFontYellow" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="Yellow"/>
@@ -117,9 +123,10 @@
                         </i:Interaction.Behaviors>
                     </PasswordBox>
                 </Grid>
-                <Button Name="MyButton"  Grid.Row="3"
+                <Button Name="MyButton"  
                     Content="Влез"
-                        Width="120"
+                    Width="100"
+                    Grid.Row="3"
                     Style="{StaticResource BlueButtonYellowText}" Command="{Binding LogInCommand}"/>
             </Grid>            
             <Grid Grid.Column="1">

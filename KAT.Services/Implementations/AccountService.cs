@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿using System.Runtime.InteropServices;
+using System.Security;
 using AutoMapper;
 using KAT.IServices;
 using KAT.Services.AccountWebServiceReference;
@@ -17,7 +18,8 @@ namespace KAT.Services.Implementations
 
         public User Login(string username, SecureString password)
         {
-            var user = accountWebServiceClient.Login(username, password);
+            var hash = HashPassword(password);
+            var user = accountWebServiceClient.Login(username, hash);
 
             if (user == null) return null;
 
@@ -29,6 +31,26 @@ namespace KAT.Services.Implementations
             catch (AutoMapperMappingException mapEx)
             {
                 return null;
+            }
+        }
+
+        private string HashPassword(SecureString password)
+        {
+            var data = System.Text.Encoding.ASCII.GetBytes(DecryptPassword(password));
+            data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+            return System.Text.Encoding.ASCII.GetString(data);
+        }
+
+        private string DecryptPassword(SecureString encryptedPassword)
+        {
+            try
+            {
+                var passwordBSTR = Marshal.SecureStringToBSTR(encryptedPassword);
+                return Marshal.PtrToStringBSTR(passwordBSTR);
+            }
+            catch
+            {
+                return string.Empty;
             }
         }
     }

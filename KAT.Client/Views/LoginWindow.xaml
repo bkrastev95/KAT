@@ -1,13 +1,17 @@
-﻿<Window x:Class="KAT.Client.Views.LoginWindow"
+﻿<controls:MetroWindow  x:Class="KAT.Client.Views.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="КАТ - Информационна система" 
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="КАТ - Вход в системата" 
         Icon="../Images/KAT.Icon.ico"
-        MinHeight="400" 
-        MinWidth="600"
-        Height="400" Width="600">
+        ResizeMode="NoResize"
+        WindowTitleBrush="Black"
+        OverrideDefaultWindowCommandsBrush="Red"
+        ShowTitleBar="True"
+        WindowStartupLocation="CenterScreen"
+        Height="400" Width="700">
     <Window.Background>
-        <ImageBrush ImageSource="../Images/Login.jpg"></ImageBrush>
+        <ImageBrush ImageSource="../Images/loginNew.jpg"></ImageBrush>
     </Window.Background>
     <Frame Name="LayoutFrame"/>
-</Window>
+</controls:MetroWindow>

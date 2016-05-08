@@ -16,7 +16,7 @@ namespace KAT.Web.Service.Account
             NinjectConfig.ConfigureContainer();
             accountService = NinjectConfig.Kernel.Get<IAccountService>();
         }
-        public User Login(string username, SecureString password)
+        public User Login(string username, string password)
         {
             return accountService.Login(username, password);
         }

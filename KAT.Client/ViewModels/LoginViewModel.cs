@@ -60,17 +60,27 @@ namespace KAT.Client.ViewModels
 
         private void Login(object obj)
         {
+            if (string.IsNullOrEmpty(Username))
+            {
+                MessageBox.Show("Моля, въведете потребителско име!");
+                return;
+            }
+            if (Password == null || Password.Length == 0)
+            {
+                MessageBox.Show("Моля, въведете парола!");
+                return;
+            }
+
             var user = accountService.Login(username, password);
             if (user != null)
             {
-                var loginWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "LoginWindow");
+                var loginWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault();
                 if (loginWindow != null)
                 {
+                    var mainWindow = new Views.MainWindow(user) {DataContext = new MainWindowViewModel(user)};
+                    mainWindow.Show();
                     loginWindow.Close();
                 }
-
-                var mainWindow = new Views.MainWindow();
-                mainWindow.Show();
             }
             else
             {
