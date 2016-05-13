@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="KAT.Web.Service.Nomenclature.NomenclatureWebService" CodeBehind="NomenclatureWebService.svc.cs" %>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9f68664b-2983-4dc7-a1c8-2a10a439ff7e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1980/Nomenclature/NomenclatureWebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="NomenclatureWebService.disco" MetadataType="Disco" ID="176b8722-290a-40b2-a72c-b70e167d5688" SourceId="1" SourceUrl="http://localhost:1980/Nomenclature/NomenclatureWebService.svc?disco" />
+    <MetadataFile FileName="NomenclatureWebService.wsdl" MetadataType="Wsdl" ID="a8c9c538-8367-4dd1-8182-5fd9d462ac98" SourceId="1" SourceUrl="http://localhost:1980/Nomenclature/NomenclatureWebService.svc?wsdl" />
+    <MetadataFile FileName="NomenclatureWebService.xsd" MetadataType="Schema" ID="157df7b1-2432-4ad3-aaa4-1e56d636993b" SourceId="1" SourceUrl="http://localhost:1980/Nomenclature/NomenclatureWebService.svc?xsd=xsd2" />
+    <MetadataFile FileName="NomenclatureWebService1.xsd" MetadataType="Schema" ID="8412192c-65e8-4622-ac8b-da5fe1abc8d5" SourceId="1" SourceUrl="http://localhost:1980/Nomenclature/NomenclatureWebService.svc?xsd=xsd1" />
+    <MetadataFile FileName="NomenclatureWebService2.xsd" MetadataType="Schema" ID="86bd2ac2-733c-4dc9-827d-1cc483382664" SourceId="1" SourceUrl="http://localhost:1980/Nomenclature/NomenclatureWebService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

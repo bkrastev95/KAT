@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NomenclatureWebService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:1980/Nomenclature/NomenclatureWebService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:1980/Nomenclature/NomenclatureWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:1980/Nomenclature/NomenclatureWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KAT.Web.Models" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="INomenclatureWebService_GetViolations_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetViolations" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_GetViolations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetViolationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_AddViolation_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddViolation" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_AddViolation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddViolationResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_DeleteViolation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteViolation" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_DeleteViolation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteViolationResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_UpdateViolation_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateViolation" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_UpdateViolation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateViolationResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_GetCameras_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameras" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_GetCameras_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCamerasResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_AddCamera_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCamera" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_AddCamera_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCameraResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_DeleteCamera_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCamera" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_DeleteCamera_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCameraResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_UpdateCamera_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCamera" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_UpdateCamera_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCameraResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_GetPolicemen_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPolicemen" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_GetPolicemen_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPolicemenResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_AddPoliceman_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPoliceman" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_AddPoliceman_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPolicemanResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_DeletePoliceman_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePoliceman" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_DeletePoliceman_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePolicemanResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_UpdatePoliceman_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePoliceman" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_UpdatePoliceman_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePolicemanResponse" />
+  </wsdl:message>
+  <wsdl:portType name="INomenclatureWebService">
+    <wsdl:operation name="GetViolations">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/GetViolations" message="tns:INomenclatureWebService_GetViolations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/GetViolationsResponse" message="tns:INomenclatureWebService_GetViolations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddViolation">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/AddViolation" message="tns:INomenclatureWebService_AddViolation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/AddViolationResponse" message="tns:INomenclatureWebService_AddViolation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteViolation">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/DeleteViolation" message="tns:INomenclatureWebService_DeleteViolation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/DeleteViolationResponse" message="tns:INomenclatureWebService_DeleteViolation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViolation">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/UpdateViolation" message="tns:INomenclatureWebService_UpdateViolation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/UpdateViolationResponse" message="tns:INomenclatureWebService_UpdateViolation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCameras">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/GetCameras" message="tns:INomenclatureWebService_GetCameras_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/GetCamerasResponse" message="tns:INomenclatureWebService_GetCameras_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCamera">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/AddCamera" message="tns:INomenclatureWebService_AddCamera_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/AddCameraResponse" message="tns:INomenclatureWebService_AddCamera_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCamera">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/DeleteCamera" message="tns:INomenclatureWebService_DeleteCamera_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/DeleteCameraResponse" message="tns:INomenclatureWebService_DeleteCamera_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCamera">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/UpdateCamera" message="tns:INomenclatureWebService_UpdateCamera_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/UpdateCameraResponse" message="tns:INomenclatureWebService_UpdateCamera_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPolicemen">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/GetPolicemen" message="tns:INomenclatureWebService_GetPolicemen_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/GetPolicemenResponse" message="tns:INomenclatureWebService_GetPolicemen_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPoliceman">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/AddPoliceman" message="tns:INomenclatureWebService_AddPoliceman_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/AddPolicemanResponse" message="tns:INomenclatureWebService_AddPoliceman_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePoliceman">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/DeletePoliceman" message="tns:INomenclatureWebService_DeletePoliceman_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/DeletePolicemanResponse" message="tns:INomenclatureWebService_DeletePoliceman_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePoliceman">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/UpdatePoliceman" message="tns:INomenclatureWebService_UpdatePoliceman_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/UpdatePolicemanResponse" message="tns:INomenclatureWebService_UpdatePoliceman_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_INomenclatureWebService" type="tns:INomenclatureWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetViolations">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/GetViolations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddViolation">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/AddViolation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteViolation">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/DeleteViolation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateViolation">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/UpdateViolation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameras">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/GetCameras" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCamera">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/AddCamera" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCamera">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/DeleteCamera" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCamera">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/UpdateCamera" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolicemen">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/GetPolicemen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPoliceman">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/AddPoliceman" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePoliceman">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/DeletePoliceman" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePoliceman">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/UpdatePoliceman" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NomenclatureWebService">
+    <wsdl:port name="BasicHttpBinding_INomenclatureWebService" binding="tns:BasicHttpBinding_INomenclatureWebService">
+      <soap:address location="http://localhost:1980/Nomenclature/NomenclatureWebService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

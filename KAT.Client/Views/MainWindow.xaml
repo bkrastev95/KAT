@@ -3,15 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:KAT.Client.Views"
-        xmlns:pager="clr-namespace:KAT.Client.Views.Pages"
         Title="КАТ - Информационна система"
-        WindowTitleBrush="Blue"
+        WindowTitleBrush="DodgerBlue"
         OverrideDefaultWindowCommandsBrush="Red"
         Icon="../Images/KAT.Icon.ico"
         WindowState="Maximized"
+        MinHeight="600"
+        MinWidth="900"
         ShowTitleBar="True">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+        <!--Styles-->
+        <Style x:Key="MenuItem" TargetType="Button">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="5"/>
+            <EventSetter Event="Click" Handler="OnSelectMenuItem"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="AntiqueWhite"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <!--Menu animation-->
+        <Storyboard x:Key="ShowMenu" >
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-150,0,0,0" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:1" />
+        </Storyboard>
+        <Storyboard x:Key="HideMenu">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="-150,0,0,0" AccelerationRatio=".9" Duration="0:0:0" />
+        </Storyboard>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -19,7 +38,7 @@
             <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel  Grid.Row="0"
-                    Background="Blue">
+                    Background="DodgerBlue">
             <Button Content="Изход"
                     DockPanel.Dock="Right"
                     Background="BlanchedAlmond"
@@ -47,42 +66,83 @@
         <Grid Grid.Row="1"
               Background="White">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
+
+            <!--Page workspace-->
             <Border Grid.Column="0"
+                    Margin="12,0,0,0">
+                <Frame Source="{ Binding PageName }" />
+            </Border>
+
+
+            <!--Menu-->
+            <Grid Grid.Column="0"
+                  Name="Menu"
+                  Margin="-150,0,0,0"
+                  HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="148"/>
+                    <ColumnDefinition Width="12"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1"
+                    Background="DimGray"
+                    Click="ButtonShowMenu_Click"/>
+                <Border Grid.Column="0"
+                    MouseLeave="Menu_OnMouseLeave"
                     BorderThickness="2"
-                    Margin="0,10,10,10"
                     BorderBrush="DarkBlue"
                     Background="BlanchedAlmond">
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Действия"
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Действия"
                            Background="Blue"
                            Foreground="White"
                            FontSize="14"
                            FontFamily="Colibri"/>
-                    <Label Content="Документи"></Label>
-                    <Label Content="Шофьори"></Label>
-                    <Label Content="Автомобили"></Label>
-                    <Label Content="Служители"
+                        <Button Content="Документи" 
+                                Tag="{Binding ChangePageCommand}"
+                                Style="{StaticResource MenuItem}"
+                                CommandParameter="Documents"/>
+                        <Button Content="Шофьори" 
+                                Tag="{Binding ChangePageCommand}"
+                                CommandParameter="DriversPage"
+                               Style="{StaticResource MenuItem}"/>
+                        <Button Content="Автомобили" 
+                                Tag="{Binding ChangePageCommand}"
+                                CommandParameter="CarsPage"
+                               Style="{StaticResource MenuItem}"/>
+                        <Button Content="Служители"
+                                Tag="{Binding ChangePageCommand}"
+                                CommandParameter="PolicemenPage"
+                           Style="{StaticResource MenuItem}"
                            Visibility="{Binding User.IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                    <Label Content="Нарушения"
+                        <Button Content="Нарушения"
+                                Tag="{Binding ChangePageCommand}"
+                                CommandParameter="ViolationsPage"
+                           Style="{StaticResource MenuItem}"
                            Visibility="{Binding User.IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                    <Label Content="Потребители"
+                        <Button Content="Потребители"
+                                Tag="{Binding ChangePageCommand}"
+                                CommandParameter="UsersPage"
+                           Style="{StaticResource MenuItem}"
                            Visibility="{Binding User.IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="1">
-                <Frame Source="Pages/TestPage.xaml" />
-            </Border>
-            <DockPanel Grid.Column="2">
-                <Calendar DockPanel.Dock="Top"
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+
+            <!--Widgets-->
+            <Border Grid.Column="1"
+                    BorderThickness="1,0,0,0">
+                <DockPanel >
+                    <Calendar DockPanel.Dock="Top"
                       Margin="0,20,0,40"/>
-                <local:ClockUserControl 
+                    <local:ClockUserControl 
                     DockPanel.Dock="Bottom"
                     Margin="0,20,0,20"/>
-            </DockPanel>
+                </DockPanel>
+            </Border>
         </Grid>
     </Grid>
 </controls:MetroWindow>

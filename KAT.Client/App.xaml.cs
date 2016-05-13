@@ -1,4 +1,8 @@
-﻿namespace KAT.Client
+﻿using System.Windows.Threading;
+using KAT.Client.Utilities.Messenger;
+using KAT.Client.Views;
+
+namespace KAT.Client
 {
     using System.Windows;
 
@@ -10,6 +14,11 @@
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            DispatcherUnhandledException += Application_DispatcherUnhandledException;
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -18,5 +27,12 @@
             
             Current.MainWindow.Show();
         }
+
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            Messenger.ShowMessage("Възникна грешка при работа с приложението: " + e.Exception.Message, MessageType.Error);
+        }
+
     }
 }

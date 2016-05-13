@@ -1,75 +1,90 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using AutoMapper;
 using KAT.Data.IServices;
 using KAT.Data.KAT.Context;
-using Driver = KAT.Web.Models;
+using KAT.Data.Services.Utilities;
+using Driver = KAT.Web.Models.Driver;
 
 namespace KAT.Data.Services
 {
     public class DriverService : IDriverService
     {
-        public long InsertDriver(Driver.Driver driver)
+        public DriverService()
         {
-            var dbDriver = Mapper.Map<CodeFirstModels.Driver>(driver);
-            using (var context = new KatDataContext())
-            {
-                context.Drivers.Add(dbDriver);
-                context.SaveChanges();
-            }
-
-            return dbDriver.Id;
+            Mapper.CreateMap<CodeFirstModels.Driver, Driver>();
+            Mapper.CreateMap<Driver, CodeFirstModels.Driver>();
         }
 
-        public Driver.Driver GetDriverById(long id)
+        public List<Driver> GetAllDrivers()
         {
-            CodeFirstModels.Driver driver;
-            var dbDriver = new CodeFirstModels.Driver
+            var drivers = new List<Driver>();
+            using (var context = new KatDataContext())
             {
-                Egn = "03985612",
-                FirstName = "Juan",
-                SecondName = "Lopez",
-                LastName = "Martinez"
-            };
-
-            using (var db = new KatDataContext())
-            {
-                try
-                {
-                    var query = db.Drivers.ToList();
-
-                    driver = query.FirstOrDefault();
-                }
-                catch (DataException dataEx)
-                {
-                    return null;
-                }
-                catch (NullReferenceException nullEx)
-                {
-                    return null;
-                }
+                var result = context.Drivers.ToList();
+                result.ForEach(r => drivers.Add(Mapper.Map<Driver>(r)));
+                return drivers;
             }
+        }
 
+        public long AddDriver(Driver driver)
+        {
             try
             {
-                var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<Driver.Driver, CodeFirstModels.Driver>());
-                var mapper = config.CreateMapper();
-                return mapper.Map<Driver.Driver>(driver);
-            }
-            catch (AutoMapperMappingException mapEx)
-            {
-                return new Driver.Driver
+                var dbDriver = Mapper.Map<CodeFirstModels.Driver>(driver);
+                using (var context = new KatDataContext())
                 {
-                    Id = driver.Id,
-                    FirstName = driver.FirstName,
-                    SecondName = driver.SecondName,
-                    LastName = driver.LastName
-                };
-                throw;
+                    context.Drivers.Add(dbDriver);
+                    context.SaveChanges();
+                }
+
+                return dbDriver.Id;
             }
-            
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public bool DeleteDriver(long id)
+        {
+            try
+            {
+                using (var context = new KatDataContext())
+                {
+                    var removeDriver = context.Drivers.FirstOrDefault(d => d.Id == id);
+                    context.Drivers.Remove(removeDriver);
+                    context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateDriver(Driver driver)
+        {
+            try
+            {
+                var updateDriver = Mapper.Map<CodeFirstModels.Driver>(driver);
+                using (var context = new KatDataContext())
+                {
+                    var dbRecord = context.Drivers.FirstOrDefault(d => d.Id == driver.Id);
+                    PropertyCopy.Copy(updateDriver, dbRecord);
+                    context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

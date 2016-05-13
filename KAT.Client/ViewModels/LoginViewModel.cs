@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using KAT.Client.Ninject;
 using KAT.Client.Utilities;
+using KAT.Client.Utilities.Messenger;
 using KAT.IServices;
 using Ninject;
 
@@ -62,12 +63,12 @@ namespace KAT.Client.ViewModels
         {
             if (string.IsNullOrEmpty(Username))
             {
-                MessageBox.Show("Моля, въведете потребителско име!");
+                Messenger.ShowMessage("Моля, въведете потребителско име!", MessageType.Warning);
                 return;
             }
             if (Password == null || Password.Length == 0)
             {
-                MessageBox.Show("Моля, въведете парола!");
+                Messenger.ShowMessage("Моля, въведете парола!", MessageType.Warning);
                 return;
             }
 
@@ -84,7 +85,7 @@ namespace KAT.Client.ViewModels
             }
             else
             {
-                MessageBox.Show("Невалидни данни!");
+                Messenger.ShowMessage("Невалидни данни!", MessageType.Error);
             }
         }
 

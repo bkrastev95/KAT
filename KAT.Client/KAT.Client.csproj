@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.9\lib\net45\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
@@ -90,12 +94,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utilities\Messenger\MessageType.cs" />
+    <Compile Include="Utilities\Messenger\Messenger.cs" />
     <Compile Include="Utilities\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="Utilities\PropertyCopy.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Pages\DocumentsViewModel.cs" />
+    <Compile Include="ViewModels\Pages\DriversViewModel.cs" />
     <Compile Include="Views\ClockUserControl.xaml.cs">
       <DependentUpon>ClockUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditorWindow.xaml.cs">
+      <DependentUpon>EditorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FieldUserControl.xaml.cs">
       <DependentUpon>FieldUserControl.xaml</DependentUpon>
@@ -113,10 +125,38 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\MessageWindow.xaml.cs">
+      <DependentUpon>MessageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\CarsPage.xaml.cs">
+      <DependentUpon>CarsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Documents.xaml.cs">
+      <DependentUpon>Documents.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\DriversPage.xaml.cs">
+      <DependentUpon>DriversPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PolicemenPage.xaml.cs">
+      <DependentUpon>PolicemenPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\UpsertDocument.xaml.cs">
+      <DependentUpon>UpsertDocument.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\UsersPage.xaml.cs">
+      <DependentUpon>UsersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ViolationsPage.xaml.cs">
+      <DependentUpon>ViolationsPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\ClockUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,7 +176,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MessageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\CarsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Documents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\DriversPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\PolicemenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\TestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\UpsertDocument.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\UsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ViolationsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +271,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Clock.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Doc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AddDoc.png" />
+    <Resource Include="Images\DelDoc.png" />
+    <Resource Include="Images\EditDoc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,7 +9,7 @@
 
         public string RegNumber { get; set; }
 
-        public Nomenclature Color { get; set; }
+        public string Color { get; set; }
 
         public Nomenclature Type { get; set; }
 

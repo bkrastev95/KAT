@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using KAT.Client.Utilities;
+using KAT.Client.Utilities.Messenger;
 using KAT.Client.Views;
 using KAT.Models.User;
 
@@ -15,13 +16,20 @@ namespace KAT.Client.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private string pageName;
         private User user;
         private ICommand logOffCommand;
+        private ICommand changePageCommand;
+
+        private const string PageNamePrefix = "Pages/";
+        private const string PageNamePostfix = ".xaml";
 
         public MainWindowViewModel(User loggedUser)
         {
             User = loggedUser;
+            PageName = "TestPage";
             logOffCommand = new RelayCommand(LogOff);
+            changePageCommand = new RelayCommand(ChangePage);
         }
 
         #region Properties
@@ -30,6 +38,12 @@ namespace KAT.Client.ViewModels
         {
             get { return logOffCommand; }
             set { logOffCommand = value; }
+        }
+
+        public ICommand ChangePageCommand
+        {
+            get { return changePageCommand; }
+            set { changePageCommand = value; }
         }
 
         public User User
@@ -41,6 +55,16 @@ namespace KAT.Client.ViewModels
             set
             {
                 user = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string PageName
+        {
+            get { return string.Format("{0}{1}{2}", PageNamePrefix, pageName, PageNamePostfix); }
+            set
+            {
+                pageName = value;
                 NotifyPropertyChanged();
             }
         }
@@ -59,6 +83,12 @@ namespace KAT.Client.ViewModels
                 logInWindow.Show();
                 mainWindow.Close();
             }
+        }
+
+        private void ChangePage(object obj)
+        {
+            var name = (string) obj;
+            PageName = name;
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propName = "")

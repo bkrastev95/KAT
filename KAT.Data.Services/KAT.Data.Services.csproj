@@ -51,8 +51,11 @@
   <ItemGroup>
     <Compile Include="AccountService.cs" />
     <Compile Include="CarService.cs" />
+    <Compile Include="DocumentService.cs" />
     <Compile Include="DriverService.cs" />
+    <Compile Include="NomenclatureService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\PropertyCopy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KAT.Data\KAT.Data.csproj">

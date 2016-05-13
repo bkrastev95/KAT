@@ -14,6 +14,8 @@ namespace KAT.Web.Service.Ninject
             Kernel.Bind<ICarService>().To<CarService>().InTransientScope();
             Kernel.Bind<IDriverService>().To<DriverService>().InTransientScope();
             Kernel.Bind<IAccountService>().To<AccountService>().InTransientScope();
+            Kernel.Bind<IDocumentService>().To<DocumentService>().InTransientScope();
+            Kernel.Bind<INomenclatureService>().To<NomenclatureService>().InTransientScope();
         }
 
     }

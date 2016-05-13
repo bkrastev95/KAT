@@ -9,7 +9,11 @@ namespace KAT.Data.CodeFirstModels
 
         [Required]
         public string RegNumber { get; set; }
+
+        public string Color { get; set; }
         public virtual CarType Type { get; set; }
         public virtual Model Model { get; set; }
+
+        public virtual Driver Driver { get; set; }
     }
 }

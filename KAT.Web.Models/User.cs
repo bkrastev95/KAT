@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using System.Security;
 
 namespace KAT.Web.Models
 {

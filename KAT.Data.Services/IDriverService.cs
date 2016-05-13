@@ -1,11 +1,16 @@
-﻿using KAT.Web.Models;
+﻿using System.Collections.Generic;
+using KAT.Web.Models;
 
 namespace KAT.Data.IServices
 {
     public interface IDriverService
     {
-        long InsertDriver(Driver driver);
+        List<Driver> GetAllDrivers();
 
-        Driver GetDriverById(long id);
+        long AddDriver(Driver driver);
+
+        bool DeleteDriver(long id);
+
+        bool UpdateDriver(Driver driver);
     }
 }

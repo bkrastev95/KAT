@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using KAT.Data.IServices;
 using KAT.Web.Service.Ninject;
 using Ninject;
@@ -9,32 +10,32 @@ namespace KAT.Web.Service.Driver
     // NOTE: In order to launch WCF Test Client for testing this service, please select DriverWebService.svc or DriverWebService.svc.cs at the Solution Explorer and start debugging.
     public class DriverWebService : IDriverWebService
     {
-        public Models.Driver GetDriver(long value)
+        private readonly IDriverService driverService;
+
+        public DriverWebService()
         {
             NinjectConfig.ConfigureContainer();
-            var driverService = NinjectConfig.Kernel.Get<IDriverService>();
-            var result = driverService.GetDriverById(1);
-            var testResult = new Models.Driver
-            {
-                FirstName = "Manolo",
-                Id = 1,
-                LastName = "Rodriguez",
-                SecondName = "Lopez"
-            };
+            driverService = NinjectConfig.Kernel.Get<IDriverService>();
+        }
+        
+        public List<Models.Driver> GetDrivers()
+        {
+            return driverService.GetAllDrivers();
+        }
 
-            return result;
+        public bool DeleteDriver(long id)
+        {
+            return driverService.DeleteDriver(id);
         }
 
         public long InsertDriver(Models.Driver driver)
         {
-            if (driver == null)
-            {
-                throw new ArgumentNullException("driver");
-            }
+            return driverService.AddDriver(driver);
+        }
 
-            // mapper.Map(Driver1, Driver2);
-            // driverDataService.InsertDriver(Driver2)
-            return 0;
+        public bool UpdateDriver(Models.Driver driver)
+        {
+            return driverService.UpdateDriver(driver);
         }
     }
 }

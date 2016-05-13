@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace KAT.Web.Models
 {
@@ -13,7 +14,7 @@ namespace KAT.Web.Models
         public string SecondName { get; set; }
         [DataMember]
         public string LastName { get; set; }
-        //[DataMember]
-        //public List<Car> Cars { get; set; }
+        [DataMember]
+        public List<Car> Cars { get; set; }
     }
 }

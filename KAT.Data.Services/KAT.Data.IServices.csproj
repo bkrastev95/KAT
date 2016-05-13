@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="IAccountService.cs" />
     <Compile Include="ICarService.cs" />
+    <Compile Include="IDocumentService.cs" />
     <Compile Include="IDriverService.cs" />
+    <Compile Include="INomenclatureService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

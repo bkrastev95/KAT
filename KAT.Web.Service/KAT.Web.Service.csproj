@@ -79,7 +79,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\AccountWebService.svc" />
+    <Content Include="Car\CarWebService.svc" />
+    <Content Include="Document\DocumentWebService.svc" />
     <Content Include="Driver\DriverWebService.svc" />
+    <Content Include="Nomenclature\NomenclatureWebService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -87,11 +90,23 @@
       <DependentUpon>AccountWebService.svc</DependentUpon>
     </Compile>
     <Compile Include="Account\IAccountWebService.cs" />
+    <Compile Include="Car\CarWebService.svc.cs">
+      <DependentUpon>CarWebService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Car\ICarWebService.cs" />
+    <Compile Include="Document\DocumentWebService.svc.cs">
+      <DependentUpon>DocumentWebService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Document\IDocumentWebService.cs" />
     <Compile Include="Driver\DriverWebService.svc.cs">
       <DependentUpon>DriverWebService.svc</DependentUpon>
     </Compile>
     <Compile Include="Driver\IDriverWebService.cs" />
     <Compile Include="Ninject\NinjectConfig.cs" />
+    <Compile Include="Nomenclature\INomenclatureWebService.cs" />
+    <Compile Include="Nomenclature\NomenclatureWebService.svc.cs">
+      <DependentUpon>NomenclatureWebService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

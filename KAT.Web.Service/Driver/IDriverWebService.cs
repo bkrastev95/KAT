@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 
 namespace KAT.Web.Service.Driver
 {
@@ -7,9 +8,15 @@ namespace KAT.Web.Service.Driver
     public interface IDriverWebService
     {
         [OperationContract]
-        Models.Driver GetDriver(long value);
+        List<Models.Driver> GetDrivers();
+
+        [OperationContract]
+        bool DeleteDriver(long id);
 
         [OperationContract]
         long InsertDriver(Models.Driver driver);
+
+        [OperationContract]
+        bool UpdateDriver(Models.Driver driver);
     }
 }
