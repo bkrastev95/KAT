@@ -1,46 +1,60 @@
-﻿using KAT.IServices;
+﻿using System.Linq;
+using AutoMapper;
+using KAT.IServices;
+using KAT.Models.Driver;
+using KAT.Services.CarWebServiceReference;
 
 namespace KAT.Services.Implementations
 {
     using System.Collections.Generic;
 
     using Models.Car;
+    using Models.Nomenclature;
 
 
     public class CarsService : ICarsService
     {
-        public IEnumerable<Car> GetAllCars()
+        private readonly CarWebServiceClient client;
+        private readonly IMapper mapper;
+
+        public CarsService()
         {
-            // Open connection to web service
+            client = new CarWebServiceClient();
 
-            // fetch all cars with appropriate command
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Car, CarWebServiceReference.Car>();
+                cfg.CreateMap<CarWebServiceReference.Car, Car>();
+                cfg.CreateMap<CarWebServiceReference.Nomenclature, Nomenclature>();
+                cfg.CreateMap<Nomenclature, CarWebServiceReference.Nomenclature>();
+                cfg.CreateMap<Driver, SimpleDriver>();
+                cfg.CreateMap<SimpleDriver, Driver>();
+                
+                cfg.CreateMissingTypeMaps = true;
+            });
 
-            var car = new Car { RegNumber = "you made it!" };
-
-            return new List<Car>{ car };
+            mapper = config.CreateMapper();
         }
 
-        public Car GetCarById()
+        public List<Car> GetCars()
         {
-            // Open connection to web service
-
-            // serach all cars and get one that matches
-
-            return new Car();
+            var result = client.GetCars().ToList();
+            return result.Select(car => mapper.Map<Car>(car)).ToList();
         }
 
-        public void UpsertCar(Car car)
+        public long InsertCar(Car car)
         {
-            // Open connection to web service
-
-            // make POST with serialized model
+            return client.InsertCar(mapper.Map<CarWebServiceReference.Car>(car));
         }
 
-        public void DeleteCar(long carId)
+        public bool DeleteCar(long id)
         {
-            // Open connection to web service
+            return client.DeleteCar(id);
+        }
 
-            // pass the parameter calling the appropriate function and let the web service do the rest of the job
+        public bool UpdateCar(Car car)
+        {
+            return client.UpdateCar(mapper.Map<CarWebServiceReference.Car>(car));
         }
     }
 }

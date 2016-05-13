@@ -1,52 +1,58 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using KAT.IServices;
+using KAT.Services.DriverWebServiceReference;
 
 namespace KAT.Services.Implementations
 {
     using System.Collections.Generic;
 
     using Models.Driver;
+    using Models.Car;
 
 
     public class DriversService : IDriversService
     {
-        public IEnumerable<Driver> GetAllDrivers()
-        {
-            throw new System.NotImplementedException();
-        }
+        private readonly DriverWebServiceClient client;
+        private readonly IMapper mapper;
 
-        public Driver GetDriverById(long driverId)
-        {
-            var driverService = new DriverWebServiceReference.DriverWebServiceClient();
-            var result = driverService.GetDriver(driverId);
 
+        public DriversService()
+        {
+            client = new DriverWebServiceClient();
             var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<DriverWebServiceReference.Driver, Driver>());
-            var mapper = config.CreateMapper();
-            try
             {
-                return mapper.Map<Driver>(result);
-            }
-            catch (AutoMapperMappingException mapEx)
-            {
-                return new Driver
-                {
-                    FirstName = result.FirstName,
-                    SecondName = result.SecondName,
-                    LastName = result.LastName,
-                    Id = result.Id
-                };
-            }
+                cfg.CreateMap<DriverWebServiceReference.Driver, Driver>()
+                    .IncludeBase<SimpleDriver, Driver>();
+                cfg.CreateMap<Driver, DriverWebServiceReference.Driver>()
+                    .IncludeBase<Driver, SimpleDriver>();
+                cfg.CreateMap<Car, DriverWebServiceReference.Car>();
+                cfg.CreateMap<DriverWebServiceReference.Car, Car>();
+                cfg.CreateMissingTypeMaps = true;
+            });
+
+            mapper = config.CreateMapper();
         }
 
-        public void UpsertDriver(Driver car)
+        public List<Driver> GetDrivers()
         {
-            throw new System.NotImplementedException();
+            var result = client.GetDrivers().ToList();
+            return result.Select(driver => mapper.Map<Driver>(driver)).ToList();
         }
 
-        public void DeleteDriver(long carId)
+        public long InsertDriver(Driver driver)
         {
-            throw new System.NotImplementedException();
+            return client.InsertDriver(mapper.Map<DriverWebServiceReference.Driver>(driver));
+        }
+
+        public bool DeleteDriver(long id)
+        {
+            return client.DeleteDriver(id);
+        }
+
+        public bool UpdateDriver(Driver driver)
+        {
+            return client.UpdateDriver(mapper.Map<DriverWebServiceReference.Driver>(driver));
         }
     }
 }

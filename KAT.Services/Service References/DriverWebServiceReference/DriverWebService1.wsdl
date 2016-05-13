@@ -7,11 +7,17 @@
       <xsd:import schemaLocation="http://localhost:1980/Driver/DriverWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KAT.Web.Models" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IDriverWebService_GetDriver_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDriver" />
+  <wsdl:message name="IDriverWebService_GetDrivers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDrivers" />
   </wsdl:message>
-  <wsdl:message name="IDriverWebService_GetDriver_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDriverResponse" />
+  <wsdl:message name="IDriverWebService_GetDrivers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDriversResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDriverWebService_DeleteDriver_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDriver" />
+  </wsdl:message>
+  <wsdl:message name="IDriverWebService_DeleteDriver_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDriverResponse" />
   </wsdl:message>
   <wsdl:message name="IDriverWebService_InsertDriver_InputMessage">
     <wsdl:part name="parameters" element="tns:InsertDriver" />
@@ -19,20 +25,43 @@
   <wsdl:message name="IDriverWebService_InsertDriver_OutputMessage">
     <wsdl:part name="parameters" element="tns:InsertDriverResponse" />
   </wsdl:message>
+  <wsdl:message name="IDriverWebService_UpdateDriver_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDriver" />
+  </wsdl:message>
+  <wsdl:message name="IDriverWebService_UpdateDriver_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDriverResponse" />
+  </wsdl:message>
   <wsdl:portType name="IDriverWebService">
-    <wsdl:operation name="GetDriver">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDriverWebService/GetDriver" message="tns:IDriverWebService_GetDriver_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDriverWebService/GetDriverResponse" message="tns:IDriverWebService_GetDriver_OutputMessage" />
+    <wsdl:operation name="GetDrivers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDriverWebService/GetDrivers" message="tns:IDriverWebService_GetDrivers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDriverWebService/GetDriversResponse" message="tns:IDriverWebService_GetDrivers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDriver">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDriverWebService/DeleteDriver" message="tns:IDriverWebService_DeleteDriver_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDriverWebService/DeleteDriverResponse" message="tns:IDriverWebService_DeleteDriver_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="InsertDriver">
       <wsdl:input wsaw:Action="http://tempuri.org/IDriverWebService/InsertDriver" message="tns:IDriverWebService_InsertDriver_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDriverWebService/InsertDriverResponse" message="tns:IDriverWebService_InsertDriver_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateDriver">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDriverWebService/UpdateDriver" message="tns:IDriverWebService_UpdateDriver_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDriverWebService/UpdateDriverResponse" message="tns:IDriverWebService_UpdateDriver_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IDriverWebService" type="tns:IDriverWebService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetDriver">
-      <soap:operation soapAction="http://tempuri.org/IDriverWebService/GetDriver" style="document" />
+    <wsdl:operation name="GetDrivers">
+      <soap:operation soapAction="http://tempuri.org/IDriverWebService/GetDrivers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDriver">
+      <soap:operation soapAction="http://tempuri.org/IDriverWebService/DeleteDriver" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -42,6 +71,15 @@
     </wsdl:operation>
     <wsdl:operation name="InsertDriver">
       <soap:operation soapAction="http://tempuri.org/IDriverWebService/InsertDriver" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDriver">
+      <soap:operation soapAction="http://tempuri.org/IDriverWebService/UpdateDriver" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:1980/Driver/DriverWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KAT.Web.Models" />
-  <xs:element name="GetDriver">
+  <xs:element name="GetDrivers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDriversResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="value" type="xs:long" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KAT.Web.Models" minOccurs="0" name="GetDriversResult" nillable="true" type="q1:ArrayOfDriver" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDriverResponse">
+  <xs:element name="DeleteDriver">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KAT.Web.Models" minOccurs="0" name="GetDriverResult" nillable="true" type="q1:Driver" />
+        <xs:element minOccurs="0" name="id" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteDriverResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteDriverResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -26,6 +38,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="InsertDriverResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDriver">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KAT.Web.Models" minOccurs="0" name="driver" nillable="true" type="q3:Driver" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDriverResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateDriverResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

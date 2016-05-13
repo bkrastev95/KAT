@@ -5,13 +5,12 @@ namespace KAT.IServices
 {
     public interface ICarsService
     {
-        IEnumerable<Car> GetAllCars();
+        List<Car> GetCars();
 
-        Car GetCarById();
+        long InsertCar(Car driver);
 
-        void UpsertCar(Car car);
+        bool DeleteCar(long id);
 
-        void DeleteCar(long carId);
-
+        bool UpdateCar(Car driver);
     }
 }

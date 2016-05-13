@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="251b6d24-5904-4b00-a339-71242891bf93" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1980/Car/CarWebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CarWebService.xsd" MetadataType="Schema" ID="6fd968b6-e3ae-47d1-9822-fddc01cffa29" SourceId="1" SourceUrl="http://localhost:1980/Car/CarWebService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CarWebService1.xsd" MetadataType="Schema" ID="500afa45-a4ac-48c6-be8f-1def43bc54ba" SourceId="1" SourceUrl="http://localhost:1980/Car/CarWebService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CarWebService2.xsd" MetadataType="Schema" ID="1546d846-0693-446b-9c6d-b443472b5fd5" SourceId="1" SourceUrl="http://localhost:1980/Car/CarWebService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CarWebService.disco" MetadataType="Disco" ID="cdb2912e-a28e-4b49-9881-dcf1fd75063c" SourceId="1" SourceUrl="http://localhost:1980/Car/CarWebService.svc?disco" />
+    <MetadataFile FileName="CarWebService.wsdl" MetadataType="Wsdl" ID="891f6255-c257-4363-83bb-03cd4d5ce2cf" SourceId="1" SourceUrl="http://localhost:1980/Car/CarWebService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

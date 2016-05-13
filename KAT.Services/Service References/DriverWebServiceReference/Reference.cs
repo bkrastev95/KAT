@@ -17,7 +17,31 @@ namespace KAT.Services.DriverWebServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Driver", Namespace="http://schemas.datacontract.org/2004/07/KAT.Web.Models")]
     [System.SerializableAttribute()]
-    public partial class Driver : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Driver : KAT.Services.DriverWebServiceReference.SimpleDriver {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private KAT.Services.DriverWebServiceReference.Car[] CarsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public KAT.Services.DriverWebServiceReference.Car[] Cars {
+            get {
+                return this.CarsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CarsField, value) != true)) {
+                    this.CarsField = value;
+                    this.RaisePropertyChanged("Cars");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SimpleDriver", Namespace="http://schemas.datacontract.org/2004/07/KAT.Web.Models")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(KAT.Services.DriverWebServiceReference.Driver))]
+    public partial class SimpleDriver : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -106,21 +130,219 @@ namespace KAT.Services.DriverWebServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Car", Namespace="http://schemas.datacontract.org/2004/07/KAT.Web.Models")]
+    [System.SerializableAttribute()]
+    public partial class Car : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ColorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private KAT.Services.DriverWebServiceReference.SimpleDriver DriverField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private KAT.Services.DriverWebServiceReference.Nomenclature ModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RegNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private KAT.Services.DriverWebServiceReference.Nomenclature TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Color {
+            get {
+                return this.ColorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ColorField, value) != true)) {
+                    this.ColorField = value;
+                    this.RaisePropertyChanged("Color");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public KAT.Services.DriverWebServiceReference.SimpleDriver Driver {
+            get {
+                return this.DriverField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DriverField, value) != true)) {
+                    this.DriverField = value;
+                    this.RaisePropertyChanged("Driver");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public KAT.Services.DriverWebServiceReference.Nomenclature Model {
+            get {
+                return this.ModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelField, value) != true)) {
+                    this.ModelField = value;
+                    this.RaisePropertyChanged("Model");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RegNumber {
+            get {
+                return this.RegNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RegNumberField, value) != true)) {
+                    this.RegNumberField = value;
+                    this.RaisePropertyChanged("RegNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public KAT.Services.DriverWebServiceReference.Nomenclature Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Nomenclature", Namespace="http://schemas.datacontract.org/2004/07/KAT.Web.Models")]
+    [System.SerializableAttribute()]
+    public partial class Nomenclature : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DriverWebServiceReference.IDriverWebService")]
     public interface IDriverWebService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/GetDriver", ReplyAction="http://tempuri.org/IDriverWebService/GetDriverResponse")]
-        KAT.Services.DriverWebServiceReference.Driver GetDriver(long value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/GetDrivers", ReplyAction="http://tempuri.org/IDriverWebService/GetDriversResponse")]
+        KAT.Services.DriverWebServiceReference.Driver[] GetDrivers();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/GetDriver", ReplyAction="http://tempuri.org/IDriverWebService/GetDriverResponse")]
-        System.Threading.Tasks.Task<KAT.Services.DriverWebServiceReference.Driver> GetDriverAsync(long value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/GetDrivers", ReplyAction="http://tempuri.org/IDriverWebService/GetDriversResponse")]
+        System.Threading.Tasks.Task<KAT.Services.DriverWebServiceReference.Driver[]> GetDriversAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/DeleteDriver", ReplyAction="http://tempuri.org/IDriverWebService/DeleteDriverResponse")]
+        bool DeleteDriver(long id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/DeleteDriver", ReplyAction="http://tempuri.org/IDriverWebService/DeleteDriverResponse")]
+        System.Threading.Tasks.Task<bool> DeleteDriverAsync(long id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/InsertDriver", ReplyAction="http://tempuri.org/IDriverWebService/InsertDriverResponse")]
         long InsertDriver(KAT.Services.DriverWebServiceReference.Driver driver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/InsertDriver", ReplyAction="http://tempuri.org/IDriverWebService/InsertDriverResponse")]
         System.Threading.Tasks.Task<long> InsertDriverAsync(KAT.Services.DriverWebServiceReference.Driver driver);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/UpdateDriver", ReplyAction="http://tempuri.org/IDriverWebService/UpdateDriverResponse")]
+        bool UpdateDriver(KAT.Services.DriverWebServiceReference.Driver driver);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriverWebService/UpdateDriver", ReplyAction="http://tempuri.org/IDriverWebService/UpdateDriverResponse")]
+        System.Threading.Tasks.Task<bool> UpdateDriverAsync(KAT.Services.DriverWebServiceReference.Driver driver);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -150,12 +372,20 @@ namespace KAT.Services.DriverWebServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public KAT.Services.DriverWebServiceReference.Driver GetDriver(long value) {
-            return base.Channel.GetDriver(value);
+        public KAT.Services.DriverWebServiceReference.Driver[] GetDrivers() {
+            return base.Channel.GetDrivers();
         }
         
-        public System.Threading.Tasks.Task<KAT.Services.DriverWebServiceReference.Driver> GetDriverAsync(long value) {
-            return base.Channel.GetDriverAsync(value);
+        public System.Threading.Tasks.Task<KAT.Services.DriverWebServiceReference.Driver[]> GetDriversAsync() {
+            return base.Channel.GetDriversAsync();
+        }
+        
+        public bool DeleteDriver(long id) {
+            return base.Channel.DeleteDriver(id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteDriverAsync(long id) {
+            return base.Channel.DeleteDriverAsync(id);
         }
         
         public long InsertDriver(KAT.Services.DriverWebServiceReference.Driver driver) {
@@ -164,6 +394,14 @@ namespace KAT.Services.DriverWebServiceReference {
         
         public System.Threading.Tasks.Task<long> InsertDriverAsync(KAT.Services.DriverWebServiceReference.Driver driver) {
             return base.Channel.InsertDriverAsync(driver);
+        }
+        
+        public bool UpdateDriver(KAT.Services.DriverWebServiceReference.Driver driver) {
+            return base.Channel.UpdateDriver(driver);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateDriverAsync(KAT.Services.DriverWebServiceReference.Driver driver) {
+            return base.Channel.UpdateDriverAsync(driver);
         }
     }
 }

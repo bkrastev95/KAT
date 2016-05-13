@@ -5,12 +5,12 @@ namespace KAT.IServices
 {
     public interface IDriversService
     {
-        IEnumerable<Driver> GetAllDrivers();
+        List<Driver> GetDrivers();
 
-        Driver GetDriverById(long driverId);
+        long InsertDriver(Driver driver);
 
-        void UpsertDriver(Driver car);
+        bool DeleteDriver(long id);
 
-        void DeleteDriver(long carId);
+        bool UpdateDriver(Driver driver);
     }
 }
