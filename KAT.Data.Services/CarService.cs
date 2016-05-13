@@ -15,16 +15,29 @@ namespace KAT.Data.Services
         {
             Mapper.CreateMap<CodeFirstModels.Car, Car>();
             Mapper.CreateMap<Car, CodeFirstModels.Car>();
+            Mapper.CreateMap<CodeFirstModels.Driver, SimpleDriver>();
+            Mapper.CreateMap<SimpleDriver, CodeFirstModels.Driver>();
+            Mapper.CreateMap<Nomenclature, CodeFirstModels.Nomenclatures.CarType>();
+            Mapper.CreateMap<CodeFirstModels.Nomenclatures.CarType, Nomenclature>();
+            Mapper.CreateMap<Nomenclature, CodeFirstModels.Nomenclatures.Model>();
+            Mapper.CreateMap<CodeFirstModels.Nomenclatures.Model, Nomenclature>();
         }
 
         public List<Car> GetCars()
         {
-            var cars = new List<Car>();
-            using (var context = new KatDataContext())
+            try
             {
-                var result = context.Cars.ToList();
-                result.ForEach(r => cars.Add(Mapper.Map<Car>(r)));
-                return cars;
+                var cars = new List<Car>();
+                using (var context = new KatDataContext())
+                {
+                    var result = context.Cars.ToList();
+                    result.ForEach(r => cars.Add(Mapper.Map<Car>(r)));
+                    return cars;
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<Car>();
             }
         }
 

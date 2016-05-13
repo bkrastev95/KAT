@@ -15,5 +15,7 @@ namespace KAT.Web.Models
         public Nomenclature Type { get; set; }
         [DataMember]
         public Nomenclature Model { get; set; }
+        [DataMember]
+        public SimpleDriver Driver { get; set; }
     }
 }
