@@ -101,8 +101,11 @@
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Pages\CarsViewModel.cs" />
     <Compile Include="ViewModels\Pages\DocumentsViewModel.cs" />
     <Compile Include="ViewModels\Pages\DriversViewModel.cs" />
+    <Compile Include="ViewModels\Pages\HomeViewModel.cs" />
+    <Compile Include="ViewModels\Pages\PolicemenViewModel.cs" />
     <Compile Include="Views\ClockUserControl.xaml.cs">
       <DependentUpon>ClockUserControl.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,9 @@
     </Compile>
     <Compile Include="Views\Pages\UpsertDocument.xaml.cs">
       <DependentUpon>UpsertDocument.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\UpsertPolicemanPage.xaml.cs">
+      <DependentUpon>UpsertPolicemanPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
@@ -201,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\UpsertDocument.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\UpsertPolicemanPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,6 +289,19 @@
     <Resource Include="Images\AddDoc.png" />
     <Resource Include="Images\DelDoc.png" />
     <Resource Include="Images\EditDoc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Car.png" />
+    <Resource Include="Images\Driver.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

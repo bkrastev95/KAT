@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Reflection;
 using AutoMapper;
 using KAT.Data.IServices;
 using KAT.Data.KAT.Context;
@@ -11,17 +11,31 @@ namespace KAT.Data.Services
 {
     public class DocumentService : IDocumentService
     {
+        private readonly IMapper mapper; 
+
         public DocumentService()
         {
-            // Configure Out mappings:
-            Mapper.CreateMap<CodeFirstModels.Driver, Driver>();
-            Mapper.CreateMap<CodeFirstModels.Policeman, Policeman>();
-            Mapper.CreateMap<CodeFirstModels.Nomenclatures.Violation, Violation>();
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CodeFirstModels.Document, Document>();
+                cfg.CreateMap<Document, CodeFirstModels.Document>();
+                cfg.CreateMap<CodeFirstModels.Driver, Driver>();
+                cfg.CreateMap<Driver, CodeFirstModels.Driver>();
+                cfg.CreateMap<CodeFirstModels.Policeman, Policeman>();
+                cfg.CreateMap<Policeman, CodeFirstModels.Policeman>();
+                cfg.CreateMap<Nomenclature, CodeFirstModels.Nomenclatures.Rank>();
+                cfg.CreateMap<CodeFirstModels.Nomenclatures.Rank, Nomenclature>();
+                cfg.CreateMap<CodeFirstModels.Nomenclatures.Violation, Violation>();
+                cfg.CreateMap<Violation, CodeFirstModels.Nomenclatures.Violation>();
+                cfg.CreateMap<CodeFirstModels.Nomenclatures.Camera, Camera>();
+                cfg.CreateMap<Camera, CodeFirstModels.Nomenclatures.Camera>();
+                cfg.CreateMap<CodeFirstModels.Nomenclatures.DocumentType, Nomenclature>();
+                cfg.CreateMap<Nomenclature, CodeFirstModels.Nomenclatures.DocumentType>();
 
-            // Configure In mappings:
-            Mapper.CreateMap<Driver, CodeFirstModels.Driver>();
-            Mapper.CreateMap<Policeman, CodeFirstModels.Policeman>();
-            Mapper.CreateMap<Violation, CodeFirstModels.Nomenclatures.Violation>();
+                cfg.CreateMissingTypeMaps = true;
+            });
+
+            mapper = config.CreateMapper();
         }
 
         public List<Document> GetDocuments(Document query)
@@ -33,7 +47,7 @@ namespace KAT.Data.Services
 
                 if (!string.IsNullOrEmpty(query.RegNumber))
                 {
-                    result = context.Documents.Where(d => d.RegNumber == query.RegNumber).ToList();
+                    result = context.Documents.Where(d => d.RegNumber.Contains(query.RegNumber)).ToList();
                 } 
                 else if (query.Driver != null)
                 {
@@ -50,27 +64,7 @@ namespace KAT.Data.Services
                 
                 if (result.Any())
                 {
-                    
-                    result.ForEach(d =>
-                        documents.Add(new Document
-                        {
-                            Id = d.Id,
-                            RegNumber = d.RegNumber,
-                            Date = d.Date,
-                            DocumentType = new Nomenclature
-                            {
-                                Id = d.DocumentType.Id,
-                                Name = d.DocumentType.Name
-                            },
-                            Camera = new Camera
-                            {
-                                Id = d.Camera.Id,
-                                Location = d.Camera.Location
-                            },
-                            Driver = Mapper.Map<Driver>(d.Driver),
-                            Policeman = Mapper.Map<Policeman>(d.Policeman),
-                            Violations = d.Violations.Select(Mapper.Map<Violation>).ToList()
-                        }));
+                    result.ForEach(d => documents.Add(mapper.Map<Document>(d)));
                 }
 
                 return documents;
@@ -85,6 +79,7 @@ namespace KAT.Data.Services
                 if (delete != null)
                 {
                     context.Documents.Remove(delete);
+                    context.SaveChanges();
                     return true;
                 }
 
@@ -94,21 +89,84 @@ namespace KAT.Data.Services
 
         public bool UpdateDocument(Document document)
         {
-            using (var context = new KatDataContext())
+            try
             {
-                var result = context.Documents.Where(d => d.RegNumber == document.RegNumber).ToList();
-                if (result.Count != 1)
-                {
-                    return false;
-                }
+                var updateDocument = mapper.Map<CodeFirstModels.Document>(document);
 
-                var recordToUpdate = result.FirstOrDefault();
-                foreach (var propertyInfo in document.GetType().GetProperties().Where(propertyInfo => propertyInfo.GetValue(document, null) != null))
+                using (var context = new KatDataContext())
                 {
-                    recordToUpdate.GetType().GetProperty(propertyInfo.Name).SetValue(recordToUpdate, propertyInfo.GetValue(document,null));
-                }
+                    //var result = context.Documents.Where(d => d.RegNumber == updateDocument.RegNumber).ToList();
+                    //if (result.Count != 1)
+                    //{
+                    //    return false;
+                    //}
 
-                return true;
+                    //var recordToUpdate = result.FirstOrDefault();
+
+                    //// Attach props:
+                    //if (updateDocument.Driver != null)
+                    //{
+                    //    updateDocument.Driver.Cars = context.Cars.ToList().FindAll(c => c.Driver.Id == updateDocument.Driver.Id).ToList();
+                    //    context.Drivers.Attach(updateDocument.Driver);
+                    //    recordToUpdate.Driver = updateDocument.Driver;
+                    //}
+
+                    //if (updateDocument.Violations != null && updateDocument.Violations.Any())
+                    //{
+                    //    updateDocument.Violations.ToList().ForEach(v => context.Violations.Attach(v));
+                    //    recordToUpdate.Violations = new List<CodeFirstModels.Nomenclatures.Violation>();
+                    //    updateDocument.Violations.ToList().ForEach(v => recordToUpdate.Violations.Add(v));
+                    //}
+
+                    //if (updateDocument.Camera != null)
+                    //{
+                    //    context.Cameras.Attach(updateDocument.Camera);
+                    //    recordToUpdate.Camera = updateDocument.Camera;
+                    //}
+
+                    //if (updateDocument.Policeman != null)
+                    //{
+                    //    context.Policemеn.Attach(updateDocument.Policeman);
+                    //    recordToUpdate.Policeman = updateDocument.Policeman;
+                    //}
+
+                    //if (updateDocument.DocumentType != null)
+                    //{
+                    //    context.DocumentTypes.Attach(updateDocument.DocumentType);
+                    //    recordToUpdate.DocumentType = updateDocument.DocumentType;
+                    //}
+
+                    //if (updateDocument.Picture != null)
+                    //{
+                    //    recordToUpdate.Picture = updateDocument.Picture;
+                    //}
+
+                    //recordToUpdate.Id = updateDocument.Id;
+                    //recordToUpdate.RegNumber = updateDocument.RegNumber;
+
+                    var docInDb = context.Documents.Find(updateDocument.Id);
+
+                    // Activity does not exist in database and it's new one
+                    if (docInDb == null)
+                    {
+                        context.Documents.Add(updateDocument);
+                        context.SaveChanges();
+                        return true;
+                    }
+
+                    // Activity already exist in database and modify it
+                    context.Entry(docInDb).CurrentValues.SetValues(updateDocument);
+                    context.Entry(docInDb).State = EntityState.Modified;
+
+
+                    context.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
@@ -116,13 +174,68 @@ namespace KAT.Data.Services
         {
             try
             {
+                var insertDocument = mapper.Map<CodeFirstModels.Document>(document);
                 using (var context = new KatDataContext())
                 {
-                    context.Documents.Add(Mapper.Map<CodeFirstModels.Document>(document));
-                    return document.Id;
+                    var newDoc = new CodeFirstModels.Document
+                    {
+                        Date = insertDocument.Date,
+                        Picture = insertDocument.Picture,
+                        RegNumber = insertDocument.RegNumber
+                    };
+
+                    context.Documents.Add(newDoc);
+
+                    // Attach props:
+                    if (insertDocument.Driver != null)
+                    {
+                        insertDocument.Driver.Cars = null;
+                        context.Drivers.Attach(insertDocument.Driver);
+                        newDoc.Driver = insertDocument.Driver;
+                    }
+
+                    if (insertDocument.Violations != null && insertDocument.Violations.Any())
+                    {
+                        insertDocument.Violations.ToList().ForEach(v => context.Violations.Attach(v));
+                        newDoc.Violations = insertDocument.Violations;
+                    }
+
+                    if (insertDocument.Camera != null)
+                    {
+                        context.Cameras.Attach(insertDocument.Camera);
+                        newDoc.Camera = insertDocument.Camera;
+                    }
+
+                    if (insertDocument.Policeman != null)
+                    {
+                        context.Policemеn.Attach(insertDocument.Policeman);
+                        newDoc.Policeman = insertDocument.Policeman;
+                    }
+
+                    if (insertDocument.DocumentType != null)
+                    {
+                        context.DocumentTypes.Attach(insertDocument.DocumentType);
+                        newDoc.DocumentType = insertDocument.DocumentType;
+                    }
+
+                    //var docInDb = context.Documents.Find(insertDocument.Id);
+
+                    //if (docInDb == null)
+                    //{
+                    //    insertDocument.Driver.Cars.ToList().ForEach(c => c.Driver = null);
+                    //    context.Documents.Add(insertDocument);
+                    //    context.SaveChanges();
+                    //    return insertDocument.Id;
+                    //}
+
+                    //context.Entry(docInDb).CurrentValues.SetValues(insertDocument);
+                    //context.Entry(docInDb).State = EntityState.Modified;
+
+                    context.SaveChanges();
+                    return newDoc.Id;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 0;
             }

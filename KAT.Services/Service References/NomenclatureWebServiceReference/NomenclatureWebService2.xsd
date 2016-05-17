@@ -163,4 +163,28 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetDocTypes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDocTypesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KAT.Web.Models" minOccurs="0" name="GetDocTypesResult" nillable="true" type="q10:ArrayOfNomenclature" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRanks">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRanksResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KAT.Web.Models" minOccurs="0" name="GetRanksResult" nillable="true" type="q11:ArrayOfNomenclature" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

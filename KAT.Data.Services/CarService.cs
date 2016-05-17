@@ -21,6 +21,8 @@ namespace KAT.Data.Services
             Mapper.CreateMap<CodeFirstModels.Nomenclatures.CarType, Nomenclature>();
             Mapper.CreateMap<Nomenclature, CodeFirstModels.Nomenclatures.Model>();
             Mapper.CreateMap<CodeFirstModels.Nomenclatures.Model, Nomenclature>();
+            Mapper.CreateMap<Nomenclature, CodeFirstModels.Nomenclatures.Brand>();
+            Mapper.CreateMap<CodeFirstModels.Nomenclatures.Brand, Nomenclature>();
         }
 
         public List<Car> GetCars()
@@ -31,7 +33,12 @@ namespace KAT.Data.Services
                 using (var context = new KatDataContext())
                 {
                     var result = context.Cars.ToList();
-                    result.ForEach(r => cars.Add(Mapper.Map<Car>(r)));
+                    result.ForEach((r) => 
+                    {
+                        cars.Add((Mapper.Map<Car>(r)));
+                        cars.Last().Brand = Mapper.Map<Nomenclature>(r.Model.Brand);
+                    });
+                                        
                     return cars;
                 }
             }

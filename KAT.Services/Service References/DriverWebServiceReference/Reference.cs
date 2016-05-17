@@ -47,6 +47,9 @@ namespace KAT.Services.DriverWebServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EgnField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -65,6 +68,19 @@ namespace KAT.Services.DriverWebServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Egn {
+            get {
+                return this.EgnField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EgnField, value) != true)) {
+                    this.EgnField = value;
+                    this.RaisePropertyChanged("Egn");
+                }
             }
         }
         
@@ -140,6 +156,9 @@ namespace KAT.Services.DriverWebServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private KAT.Services.DriverWebServiceReference.Nomenclature BrandField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ColorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -164,6 +183,19 @@ namespace KAT.Services.DriverWebServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public KAT.Services.DriverWebServiceReference.Nomenclature Brand {
+            get {
+                return this.BrandField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BrandField, value) != true)) {
+                    this.BrandField = value;
+                    this.RaisePropertyChanged("Brand");
+                }
             }
         }
         
@@ -265,6 +297,9 @@ namespace KAT.Services.DriverWebServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -277,6 +312,19 @@ namespace KAT.Services.DriverWebServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
             }
         }
         

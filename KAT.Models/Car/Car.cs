@@ -14,5 +14,10 @@
         public Nomenclature Type { get; set; }
 
         public Nomenclature Brand { get; set; }
+
+        public Nomenclature Model { get; set; }
+
+        public Driver.Driver Driver { get; set; }
+
     }
 }

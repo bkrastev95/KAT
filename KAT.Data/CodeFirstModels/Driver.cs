@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KAT.Data.CodeFirstModels
 {
@@ -8,6 +9,8 @@ namespace KAT.Data.CodeFirstModels
         public long Id { get; set; }
 
         [Required]
+        [StringLength(450)]
+        [Index(IsUnique = true)]
         public string Egn { get; set; }
         [Microsoft.Build.Framework.Required]
         public string FirstName { get; set; }

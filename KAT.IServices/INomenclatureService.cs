@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using KAT.Models.Camera;
+using KAT.Models.Nomenclature;
 using KAT.Models.Policeman;
 using KAT.Models.Violation;
 
@@ -40,6 +42,18 @@ namespace KAT.IServices
         bool DeletePoliceman(long id);
 
         bool UpdatePoliceman(Policeman policeman);
+
+        #endregion
+
+        #region DocTypes
+
+        List<Nomenclature> GetDocTypes();
+
+        #endregion
+
+        #region Ranks
+
+        List<Nomenclature> GetRanks();
 
         #endregion
     }

@@ -149,6 +149,9 @@
     <None Include="Service References\NomenclatureWebServiceReference\KAT.Services.NomenclatureWebServiceReference.Camera.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\NomenclatureWebServiceReference\KAT.Services.NomenclatureWebServiceReference.Nomenclature.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\NomenclatureWebServiceReference\KAT.Services.NomenclatureWebServiceReference.Policeman.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

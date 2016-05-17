@@ -2,12 +2,131 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vm="clr-namespace:KAT.Client.ViewModels.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-	Title="TestPage">
-
+      d:DesignHeight="300" d:DesignWidth="400"
+	Title="Начало">
+    <Page.DataContext>
+        <vm:HomeViewModel></vm:HomeViewModel>
+    </Page.DataContext>
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
     <Grid>
-        <Label Content="This is test page"></Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   Text="Начало"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontWeight="Bold"
+                   FontSize="22"
+                   TextDecorations="Underline"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                   Text="Система за бързо намиране:"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <DockPanel Grid.Row="2" Grid.Column="0">
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="20,0,0,10">
+                <TextBlock Text="Регистрационен номер:"
+                           Margin="0,0,0,5"
+                           FontSize="13"
+                           FontWeight="Bold"
+                           Foreground="Blue"
+                           HorizontalAlignment="Left"/>
+                <TextBox Text="{Binding SearchRegNumber }" ></TextBox>
+            </StackPanel>
+            <Button Content="Филтър"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,10"
+                    VerticalAlignment="Bottom"
+                    Height="Auto"
+                    DockPanel.Dock="Right"
+                    Command="{Binding SearchCarCommand}"/>
+        </DockPanel>
+        <TextBlock Grid.Row="2" Grid.Column="1"
+                   Text="Информация за водач:"
+                   VerticalAlignment="Bottom"
+                   Margin="10,0,0,10"
+                   FontWeight="Bold"
+                   FontSize="15"
+                   Foreground="Blue"/>
+        <Border Grid.Row="3" Grid.Column="0"
+                Margin="20,0,10,20"
+                BorderThickness="1"
+                BorderBrush="Blue">
+            <ListView 
+              ItemsSource="{Binding Cars}"
+              SelectedItem="{Binding SelectedCar}"
+              Name="DocumentsListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="39">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="../../Images/Car.png" Grid.Column="0"/>
+                            <StackPanel Grid.Column="1" 
+                                        Orientation="Horizontal">
+                                <Label Content="{Binding Brand.Name }" FontWeight="Bold"/>
+                                <Label Content="{Binding Model.Name }" FontWeight="Bold"/>
+                                <Label Content="{Binding RegNumber }" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
+        <Grid Grid.Row="3" Grid.Column="1"
+              Margin="10,0,0,20"
+               Background="BlanchedAlmond"
+              Visibility="{
+                                Binding IsSelected,
+                                Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Source="../../Images/Driver.png"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Margin="0,5,5,5"/>
+            <StackPanel Grid.Row="1" Background="BlanchedAlmond">
+                <TextBlock Text="Име:"/>
+                <TextBlock Text="{Binding SelectedCar.Driver.FullName }"
+                       Foreground="Blue"
+                       FontWeight="Bold"
+                       FontSize="14"/>
+                <TextBlock Text="Презиме:"/>
+                <TextBlock Text="{Binding SelectedCar.Driver.FullName }"
+                       Foreground="Blue"
+                       FontWeight="Bold"
+                       FontSize="14"/>
+                <TextBlock Text="Фамилия:"/>
+                <TextBlock Text="{Binding SelectedCar.Driver.FullName }"
+                       Foreground="Blue"
+                       FontWeight="Bold"
+                       FontSize="14"/>
+                <TextBlock Text="ЕГН:"/>
+                <TextBlock Text="{Binding SelectedCar.Driver.Egn }"
+                       Foreground="Blue"
+                       FontWeight="Bold"
+                       FontSize="14"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

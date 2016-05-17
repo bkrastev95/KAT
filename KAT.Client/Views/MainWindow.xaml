@@ -8,7 +8,7 @@
         OverrideDefaultWindowCommandsBrush="Red"
         Icon="../Images/KAT.Icon.ico"
         WindowState="Maximized"
-        MinHeight="600"
+        MinHeight="700"
         MinWidth="900"
         ShowTitleBar="True">
     <Window.Resources>
@@ -24,6 +24,33 @@
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
 
+        <Style x:Key="HomeButtonStyle"  TargetType="{x:Type Button}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="../Images/Home.png"></ImageBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="../Images/Home.png"></ImageBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
         <!--Menu animation-->
         <Storyboard x:Key="ShowMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-150,0,0,0" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:1" />
@@ -32,14 +59,16 @@
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="-150,0,0,0" AccelerationRatio=".9" Duration="0:0:0" />
         </Storyboard>
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <DockPanel  Grid.Row="0"
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DockPanel  Grid.Row="0"
                     Background="DodgerBlue">
-            <Button Content="Изход"
+                <Button Content="Изход"
                     DockPanel.Dock="Right"
                     Background="BlanchedAlmond"
                     HorizontalAlignment="Right"
@@ -47,14 +76,14 @@
                     Margin="7"
                     Height="23"
                     Command="{Binding LogOffCommand}"/>
-            <Label Content="{Binding User.FullName}"
+                <Label Content="{Binding User.FullName}"
                    VerticalAlignment="Center"
                    DockPanel.Dock="Right"
                    HorizontalAlignment="Right"
                    FontSize="18"
                    FontFamily="Calibri"
                    Foreground="White"/>
-            <Label
+                <Label
                 Content="Контрол на автомобилния транспорт"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -62,87 +91,97 @@
                 FontSize="20"
                 FontFamily="Colibri"
                 Foreground="White"/>
-        </DockPanel>
-        <Grid Grid.Row="1"
+            </DockPanel>
+            <Grid Grid.Row="1"
               Background="White">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
 
-            <!--Page workspace-->
-            <Border Grid.Column="0"
+                <!--Page workspace-->
+                <Border Grid.Column="0"
                     Margin="12,0,0,0">
-                <Frame Source="{ Binding PageName }" />
-            </Border>
+                    <Frame Source="{ Binding PageName }" />
+                </Border>
 
 
-            <!--Menu-->
-            <Grid Grid.Column="0"
+                <!--Menu-->
+                <Grid Grid.Column="0"
                   Name="Menu"
                   Margin="-150,0,0,0"
                   HorizontalAlignment="Left">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="148"/>
-                    <ColumnDefinition Width="12"/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="1"
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="148"/>
+                        <ColumnDefinition Width="12"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1"
                     Background="DimGray"
                     Click="ButtonShowMenu_Click"/>
-                <Border Grid.Column="0"
+                    <Border Grid.Column="0"
                     MouseLeave="Menu_OnMouseLeave"
                     BorderThickness="2"
                     BorderBrush="DarkBlue"
                     Background="BlanchedAlmond">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Действия"
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Действия"
                            Background="Blue"
                            Foreground="White"
                            FontSize="14"
                            FontFamily="Colibri"/>
-                        <Button Content="Документи" 
+                            <Button Content="Документи" 
                                 Tag="{Binding ChangePageCommand}"
                                 Style="{StaticResource MenuItem}"
                                 CommandParameter="Documents"/>
-                        <Button Content="Шофьори" 
+                            <Button Content="Шофьори" 
                                 Tag="{Binding ChangePageCommand}"
                                 CommandParameter="DriversPage"
                                Style="{StaticResource MenuItem}"/>
-                        <Button Content="Автомобили" 
+                            <Button Content="Автомобили" 
                                 Tag="{Binding ChangePageCommand}"
                                 CommandParameter="CarsPage"
                                Style="{StaticResource MenuItem}"/>
-                        <Button Content="Служители"
+                            <Button Content="Служители"
                                 Tag="{Binding ChangePageCommand}"
                                 CommandParameter="PolicemenPage"
                            Style="{StaticResource MenuItem}"
                            Visibility="{Binding User.IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                        <Button Content="Нарушения"
+                            <Button Content="Нарушения"
                                 Tag="{Binding ChangePageCommand}"
                                 CommandParameter="ViolationsPage"
                            Style="{StaticResource MenuItem}"
                            Visibility="{Binding User.IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                        <Button Content="Потребители"
+                            <Button Content="Потребители"
                                 Tag="{Binding ChangePageCommand}"
                                 CommandParameter="UsersPage"
                            Style="{StaticResource MenuItem}"
                            Visibility="{Binding User.IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!--Widgets-->
+                <Border Grid.Column="1"
+                    BorderThickness="1,0,0,0">
+                    <StackPanel Orientation="Vertical" >
+                        <!--Home button-->
+                        <Button Style="{ StaticResource HomeButtonStyle}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                        Margin="10,10,10,50"
+                        Width="70"
+                        Height="70"
+                        Tag="{Binding ChangePageCommand}"
+                        Click="OnSelectMenuItem"
+                        CommandParameter="TestPage"/>
+                        <Calendar 
+                      Margin="0,20,0,40"/>
+                        <local:ClockUserControl 
+                    
+                    Margin="0,20,0,20"/>
                     </StackPanel>
                 </Border>
             </Grid>
-
-
-            <!--Widgets-->
-            <Border Grid.Column="1"
-                    BorderThickness="1,0,0,0">
-                <DockPanel >
-                    <Calendar DockPanel.Dock="Top"
-                      Margin="0,20,0,40"/>
-                    <local:ClockUserControl 
-                    DockPanel.Dock="Bottom"
-                    Margin="0,20,0,20"/>
-                </DockPanel>
-            </Border>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </controls:MetroWindow>

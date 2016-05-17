@@ -2,8 +2,8 @@
 {
     public enum DocumentTypeEnum
     {
-        Ticket = 1,
-        Act = 2,
-        ElectronicTicket = 3
+        Ticket = 4,
+        Act = 5,
+        ElectronicTicket = 6
     }
 }

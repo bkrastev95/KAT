@@ -82,6 +82,14 @@
     <Compile Include="Migrations\201605131408178_AddDriverToCar.Designer.cs">
       <DependentUpon>201605131408178_AddDriverToCar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605151841093_UniqueFields.cs" />
+    <Compile Include="Migrations\201605151841093_UniqueFields.Designer.cs">
+      <DependentUpon>201605151841093_UniqueFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605152357027_AddCodes.cs" />
+    <Compile Include="Migrations\201605152357027_AddCodes.Designer.cs">
+      <DependentUpon>201605152357027_AddCodes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RankEnum.cs" />
@@ -108,6 +116,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605131408178_AddDriverToCar.resx">
       <DependentUpon>201605131408178_AddDriverToCar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605151841093_UniqueFields.resx">
+      <DependentUpon>201605151841093_UniqueFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605152357027_AddCodes.resx">
+      <DependentUpon>201605152357027_AddCodes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

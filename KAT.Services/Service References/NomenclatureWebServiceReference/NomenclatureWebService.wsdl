@@ -79,6 +79,18 @@
   <wsdl:message name="INomenclatureWebService_UpdatePoliceman_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePolicemanResponse" />
   </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_GetDocTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocTypes" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_GetDocTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_GetRanks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRanks" />
+  </wsdl:message>
+  <wsdl:message name="INomenclatureWebService_GetRanks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRanksResponse" />
+  </wsdl:message>
   <wsdl:portType name="INomenclatureWebService">
     <wsdl:operation name="GetViolations">
       <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/GetViolations" message="tns:INomenclatureWebService_GetViolations_InputMessage" />
@@ -127,6 +139,14 @@
     <wsdl:operation name="UpdatePoliceman">
       <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/UpdatePoliceman" message="tns:INomenclatureWebService_UpdatePoliceman_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/UpdatePolicemanResponse" message="tns:INomenclatureWebService_UpdatePoliceman_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/GetDocTypes" message="tns:INomenclatureWebService_GetDocTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/GetDocTypesResponse" message="tns:INomenclatureWebService_GetDocTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRanks">
+      <wsdl:input wsaw:Action="http://tempuri.org/INomenclatureWebService/GetRanks" message="tns:INomenclatureWebService_GetRanks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INomenclatureWebService/GetRanksResponse" message="tns:INomenclatureWebService_GetRanks_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_INomenclatureWebService" type="tns:INomenclatureWebService">
@@ -232,6 +252,24 @@
     </wsdl:operation>
     <wsdl:operation name="UpdatePoliceman">
       <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/UpdatePoliceman" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTypes">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/GetDocTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRanks">
+      <soap:operation soapAction="http://tempuri.org/INomenclatureWebService/GetRanks" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

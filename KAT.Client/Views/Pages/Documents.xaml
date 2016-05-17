@@ -16,11 +16,20 @@
     <Grid Margin="70,30,70,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="55"/>
+            <RowDefinition Height="55"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!--Title-->
+        <TextBlock Grid.Row="0"
+                   FontSize="19"
+                   FontFamily="Colibri"
+           HorizontalAlignment="Center"
+           Text="Регистър документи"
+           TextDecorations="Underline"/>
+
         <!--Search form-->
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Margin="0,0,0,5">
                 <TextBlock Text="Регистрационен номер:"
                            Margin="5,0,0,0"/>
@@ -33,7 +42,7 @@
             <StackPanel Orientation="Vertical" Margin="0,0,0,5">
                 <TextBlock Text="Име на шофьор:"
                            Margin="25,0,0,0"/>
-                <TextBox Text="{Binding SearchDocument.Driver.FullName}"
+                <TextBox Text="{Binding FullNameSearch}"
                      controls:TextBoxHelper.ClearTextButton="True" 
                      Width="120"
                      Height="30"
@@ -43,15 +52,16 @@
                     VerticalAlignment="Bottom"
                     Command="{ Binding GetDocumentsCommand }"/>
         </StackPanel>
-        <Button Grid.Row="0" 
+        <Button Grid.Row="1" 
                 HorizontalAlignment="Right" 
-                Command="{Binding }"
+                Command="{Binding OpenEditorCommand}"
+                CommandParameter="Insert"
                 Content="{StaticResource Add }" 
                 Height="30"
                 Margin="50,5,0,5"/>
 
         <!--List-->
-        <ListView Grid.Row="1"
+        <ListView Grid.Row="2"
           ItemsSource="{Binding Documents}"
           SelectedItem="{Binding SelectedDocument}"
           Name="DocumentsListView">
@@ -74,7 +84,8 @@
                         <StackPanel Grid.Column="2" Orientation="Horizontal">
                             <Button Width="28" Height="28"
                                     Style="{StaticResource ListButton}"
-                                    Command="{Binding ElementName=DocumentsListView, Path=DataContext.UpdateDocumentCommand}"
+                                    Command="{Binding ElementName=DocumentsListView, Path=DataContext.OpenEditorCommand }"
+                                    CommandParameter="Edit"
                                     Visibility="{
                                 Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, 
                                 Path=IsSelected, 

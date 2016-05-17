@@ -78,5 +78,17 @@ namespace KAT.Web.Service.Nomenclature
         {
             return nomenclatureService.UpdatePoliceman(policeman);
         }
+
+
+        public List<Models.Nomenclature> GetDocTypes()
+        {
+            return nomenclatureService.GetDocTypes();
+        }
+
+
+        public List<Models.Nomenclature> GetRanks()
+        {
+            return nomenclatureService.GetRanks();
+        }
     }
 }

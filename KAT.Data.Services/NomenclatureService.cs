@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,21 +17,32 @@ namespace KAT.Data.Services
 {
     public class NomenclatureService : INomenclatureService
     {
+        private readonly IMapper mapper;
+
         public NomenclatureService()
         {
-            // Violations
-            Mapper.CreateMap<CodeFirstModels.Nomenclatures.Violation, Violation>();
-            Mapper.CreateMap<Violation, CodeFirstModels.Nomenclatures.Violation>();
+            var config = new MapperConfiguration(cfg =>
+            {
+                // Violations
+                cfg.CreateMap<CodeFirstModels.Nomenclatures.Violation, Violation>();
+                cfg.CreateMap<Violation, CodeFirstModels.Nomenclatures.Violation>();
 
-            // Cameras
-            Mapper.CreateMap<CodeFirstModels.Nomenclatures.Camera, Camera>();
-            Mapper.CreateMap<Camera, CodeFirstModels.Nomenclatures.Camera>();
+                // Cameras
+                cfg.CreateMap<CodeFirstModels.Nomenclatures.Camera, Camera>();
+                cfg.CreateMap<Camera, CodeFirstModels.Nomenclatures.Camera>();
 
-            // Policemen
-            Mapper.CreateMap<CodeFirstModels.Policeman, Policeman>();
-            Mapper.CreateMap<Policeman, CodeFirstModels.Policeman>();
-            Mapper.CreateMap<Rank, Nomenclature>();
-            Mapper.CreateMap<Nomenclature, Rank>();
+                // Policemen
+                cfg.CreateMap<CodeFirstModels.Policeman, Policeman>();
+                cfg.CreateMap<Policeman, CodeFirstModels.Policeman>();
+                cfg.CreateMap<Rank, Nomenclature>();
+                cfg.CreateMap<Nomenclature, Rank>();
+
+                // DocTypes
+                cfg.CreateMap<DocumentType, Nomenclature>();
+                cfg.CreateMap<Nomenclature, DocumentType>();
+            });
+
+            mapper = config.CreateMapper();
         }
 
 
@@ -42,7 +54,7 @@ namespace KAT.Data.Services
             using (var context = new KatDataContext())
             {
                 var result = context.Violations.ToList();
-                result.ForEach(r => violations.Add(Mapper.Map<Violation>(r)));
+                result.ForEach(r => violations.Add(mapper.Map<Violation>(r)));
                 return violations;
             }
         }
@@ -51,7 +63,7 @@ namespace KAT.Data.Services
         {
             try
             {
-                var insertViolation = Mapper.Map<CodeFirstModels.Nomenclatures.Violation>(violation);
+                var insertViolation = mapper.Map<CodeFirstModels.Nomenclatures.Violation>(violation);
                 using (var context = new KatDataContext())
                 {
                     context.Violations.Add(insertViolation);
@@ -89,7 +101,7 @@ namespace KAT.Data.Services
         {
             try
             {
-                var updateViolation = Mapper.Map<CodeFirstModels.Nomenclatures.Violation>(violation);
+                var updateViolation = mapper.Map<CodeFirstModels.Nomenclatures.Violation>(violation);
                 using (var context = new KatDataContext())
                 {
                     var dbRecord = context.Violations.FirstOrDefault(v => v.Id == violation.Id);
@@ -115,7 +127,7 @@ namespace KAT.Data.Services
             using (var context = new KatDataContext())
             {
                 var result = context.Cameras.ToList();
-                result.ForEach(r => cameras.Add(Mapper.Map<Camera>(r)));
+                result.ForEach(r => cameras.Add(mapper.Map<Camera>(r)));
                 return cameras;
             }
         }
@@ -124,7 +136,7 @@ namespace KAT.Data.Services
         {
             try
             {
-                var insertCamera = Mapper.Map<CodeFirstModels.Nomenclatures.Camera>(camera);
+                var insertCamera = mapper.Map<CodeFirstModels.Nomenclatures.Camera>(camera);
                 using (var context = new KatDataContext())
                 {
                     context.Cameras.Add(insertCamera);
@@ -162,7 +174,7 @@ namespace KAT.Data.Services
         {
             try
             {
-                var updateCamera = Mapper.Map<CodeFirstModels.Nomenclatures.Camera>(camera);
+                var updateCamera = mapper.Map<CodeFirstModels.Nomenclatures.Camera>(camera);
                 using (var context = new KatDataContext())
                 {
                     var dbRecord = context.Cameras.FirstOrDefault(v => v.Id == camera.Id);
@@ -188,7 +200,7 @@ namespace KAT.Data.Services
             using (var context = new KatDataContext())
             {
                 var result = context.Policemеn.ToList();
-                result.ForEach(r => policemen.Add(Mapper.Map<Policeman>(r)));
+                result.ForEach(r => policemen.Add(mapper.Map<Policeman>(r)));
                 return policemen;
             }
         }
@@ -197,7 +209,7 @@ namespace KAT.Data.Services
         {
             try
             {
-                var insertPoliceman = Mapper.Map<CodeFirstModels.Policeman>(policeman);
+                var insertPoliceman = mapper.Map<CodeFirstModels.Policeman>(policeman);
                 using (var context = new KatDataContext())
                 {
                     context.Policemеn.Add(insertPoliceman);
@@ -235,11 +247,24 @@ namespace KAT.Data.Services
         {
             try
             {
-                var updatePoliceman = Mapper.Map<CodeFirstModels.Policeman>(policeman);
+                var updatePoliceman = mapper.Map<CodeFirstModels.Policeman>(policeman);
                 using (var context = new KatDataContext())
                 {
-                    var dbRecord = context.Policemеn.FirstOrDefault(v => v.Id == policeman.Id);
-                    PropertyCopy.Copy(updatePoliceman, dbRecord);
+                    //var dbRecord = context.Policemеn.FirstOrDefault(v => v.Id == policeman.Id);
+                    //PropertyCopy.Copy(updatePoliceman, dbRecord);
+                    
+                    var docInDb = context.Policemеn.Find(updatePoliceman.Id);
+
+                    if (docInDb == null)
+                    {
+                        context.Policemеn.Add(updatePoliceman);
+                        context.SaveChanges();
+                        return true;
+                    }
+
+                    context.Entry(docInDb).CurrentValues.SetValues(updatePoliceman);
+                    context.Entry(docInDb).State = EntityState.Modified;
+
                     context.SaveChanges();
                 }
 
@@ -248,6 +273,36 @@ namespace KAT.Data.Services
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        #endregion
+
+        #region DocTypes
+
+        public List<Nomenclature> GetDocTypes()
+        {
+            var docTypes = new List<Nomenclature>();
+            using (var context = new KatDataContext())
+            {
+                var result = context.DocumentTypes.ToList();
+                result.ForEach(r => docTypes.Add(mapper.Map<Nomenclature>(r)));
+                return docTypes;
+            }
+        }
+
+        #endregion
+
+        #region Ranks
+
+        public List<Nomenclature> GetRanks()
+        {
+            var ranks = new List<Nomenclature>();
+            using (var context = new KatDataContext())
+            {
+                var result = context.Ranks.ToList();
+                result.ForEach(r => ranks.Add(mapper.Map<Nomenclature>(r)));
+                return ranks;
             }
         }
 

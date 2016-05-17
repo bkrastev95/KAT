@@ -49,5 +49,19 @@ namespace KAT.Web.Service.Nomenclature
 
         #endregion
 
+        #region DocType
+
+        [OperationContract]
+        List<Models.Nomenclature> GetDocTypes();
+
+        #endregion
+
+        #region Rank
+
+        [OperationContract]
+        List<Models.Nomenclature> GetRanks();
+
+        #endregion
+
     }
 }

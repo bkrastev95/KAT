@@ -5,7 +5,256 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="300">
-    <Grid >
+    <Page.Resources>
+        <Style
+        x:Key="ButtonFocusVisual">
+            <Setter
+            Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MetroButton" TargetType="{x:Type Button}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="0,0,30,30"/>
+            <EventSetter Event="Click" Handler="CloseWindow"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+            <Setter Property="Background" Value="#EEEEEEEE"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border
+                                x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" />
+
+                            <ContentPresenter
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Padding}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                RecognizesAccessKey="True" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="OpacityMask" Value="#AA888888"/>
+                                <Setter Property="Margin" Value="2 1" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    
+    <Grid Margin="30,10,30,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <!--Reg number-->
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   TextDecorations="Underline"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Text="{Binding UpsertedDocument.RegNumber}"/>
+        
+        <!--Driver-->
+        <StackPanel Grid.Row="1" Grid.Column="0" 
+                    Margin="0,0,10,0"
+                    Orientation="Vertical">
+            <TextBlock Text="Нарушител:"
+                       HorizontalAlignment="Left"></TextBlock>
+            <ComboBox ItemsSource="{Binding Drivers}"
+                      SelectedItem="{Binding UpsertedDocument.Driver}"
+                      IsSynchronizedWithCurrentItem="True">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="{Binding FullName }" FontWeight="Bold"/>
+                            <Label Content="{Binding Egn }"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        
+        <!--Policeman-->
+        <StackPanel Grid.Row="1" Grid.Column="1" 
+                    Margin="10,0,0,0"
+                    Orientation="Vertical">
+            <TextBlock Text="Съставил:"
+                       HorizontalAlignment="Left"></TextBlock>
+            <ComboBox ItemsSource="{Binding Policemen}"
+                      SelectedItem="{Binding UpsertedDocument.Policeman}"
+                      IsSynchronizedWithCurrentItem="True">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="{Binding Name }" FontWeight="Bold"/>
+                            <Label Content="{Binding Rank.Code }"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <!--Violations-->
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+              Margin="0,10,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <!--Selected violations-->
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Нарушения:"/>
+            <ListView Grid.Column="0" Grid.Row="1"
+                      Name="AddedViolationsListView"
+                      ItemsSource="{Binding ChosenViolations}"
+                      SelectedItem="{Binding SelectedViolation}">
+                <ListView.Resources>
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                    <Style x:Key="ListButton" TargetType="Button">
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding Name}"></Label>
+                            <Button Grid.Column="1"
+                                    Style="{StaticResource ListButton}"
+                                    Width="28" Height="28"
+                                    Command="{Binding ElementName=AddedViolationsListView, Path=DataContext.RemoveViolationFromDocumentCommand}"
+                                    Visibility="{
+                                Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, 
+                                Path=IsSelected, 
+                                Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="../../Images/Remove.png"></ImageBrush>
+                                </Button.Background>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--Search violations-->
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="Търсене:"/>
+            <ListView Grid.Column="1" Grid.Row="1"
+                      Name="SearchViolationsListView"
+                      ItemsSource="{Binding Violations}"
+                      SelectedItem="{Binding ViolationToAdd }">
+                <ListView.Resources>
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                    <Style x:Key="ListButton" TargetType="Button">
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding Name}"></Label>
+                            <Button Grid.Column="1"
+                                    Style="{StaticResource ListButton}"
+                                    Width="28" Height="28"
+                                    Command="{Binding ElementName=SearchViolationsListView, Path=DataContext.AddViolationToDocumentCommand}"
+                                    Visibility="{
+                                Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, 
+                                Path=IsSelected, 
+                                Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="../../Images/Add.png"></ImageBrush>
+                                </Button.Background>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
+        <!--Document type-->
+        <StackPanel Grid.Row="3" Grid.Column="0"
+                    Margin="0,20,0,0"
+                    Orientation="Vertical">
+            <TextBlock Text="Вид документ:"
+                       HorizontalAlignment="Left"/>
+            <ComboBox ItemsSource="{Binding DocTypes}"
+                      SelectedItem="{Binding UpsertedDocument.DocumentType}"
+                      IsSynchronizedWithCurrentItem="True">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                            <Label Content="{Binding Code }" FontWeight="Bold"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        
+        <!--Date-->
+        <StackPanel Grid.Row="3" Grid.Column="1"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Right">
+            <TextBlock Text="Дата:"
+                       HorizontalAlignment="Left"/>
+            <DatePicker SelectedDate="{Binding UpsertedDocument.Date}"
+                        HorizontalAlignment="Left"/>
+        </StackPanel>
+        
+        
+        <!--Buttons-->
+        <Button Grid.Row="4" Grid.Column="1"
+                Name="Register"
+                Style="{StaticResource MetroButton}"
+                Content="Регистрирай"
+                Tag="{Binding InsertDocumentCommand}"/>
+        <Button Grid.Row="4" Grid.Column="1"
+                Name="Edit"
+                Style="{StaticResource MetroButton}"
+                Content="Запази"
+                Tag="{Binding UpdateDocumentCommand}"/>
         
     </Grid>
 </Page>

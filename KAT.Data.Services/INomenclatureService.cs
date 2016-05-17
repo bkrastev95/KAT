@@ -40,5 +40,17 @@ namespace KAT.Data.IServices
         bool UpdatePoliceman(Policeman policeman);
 
         #endregion
+
+        #region DocTypes
+
+        List<Nomenclature> GetDocTypes();
+
+        #endregion
+
+        #region Ranks
+
+        List<Nomenclature> GetRanks();
+
+        #endregion
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using KAT.IServices;
 using KAT.Services.NomenclatureWebServiceReference;
@@ -112,6 +113,30 @@ namespace KAT.Services.Implementations
         {
             var updatePoliceman = Mapper.Map<NomenclatureWebServiceReference.Policeman>(policeman);
             return client.UpdatePoliceman(updatePoliceman);
+        }
+
+        #endregion
+
+        #region DocTypes
+
+        public List<Nomenclature> GetDocTypes()
+        {
+            var types = new List<Nomenclature>();
+            var result = client.GetDocTypes();
+            result.ToList().ForEach(v => types.Add(Mapper.Map<Nomenclature>(v)));
+            return types;
+        } 
+
+        #endregion
+
+        #region Ranks
+
+        public List<Nomenclature> GetRanks()
+        {
+            var ranks = new List<Nomenclature>();
+            var result = client.GetRanks();
+            result.ToList().ForEach(v => ranks.Add(Mapper.Map<Nomenclature>(v)));
+            return ranks;
         }
 
         #endregion

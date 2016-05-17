@@ -4,7 +4,8 @@
         Icon="../Images/KAT.Icon.ico"
         WindowTitleBrush="DarkGoldenrod"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Height="{Binding SystemParameters.PrimaryScreenHeight}" Width="700">
+        MinHeight="650" MinWidth="800" Margin="0,50,0,50"
+        WindowStartupLocation="CenterScreen">
     <Border BorderThickness="2"
             BorderBrush="DarkGoldenrod">
         <Frame Name="EditorFrame"/>

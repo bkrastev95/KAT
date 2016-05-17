@@ -13,5 +13,7 @@ namespace KAT.Web.Models
         public string SecondName { get; set; }
         [DataMember]
         public string LastName { get; set; }
+        [DataMember]
+        public string Egn { get; set; }
     }
 }

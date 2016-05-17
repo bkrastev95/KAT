@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using KAT.Data.CodeFirstModels.Nomenclatures;
 
 namespace KAT.Data.CodeFirstModels
@@ -8,6 +9,8 @@ namespace KAT.Data.CodeFirstModels
         public long Id { get; set; }
 
         [Required]
+        [StringLength(450)]
+        [Index(IsUnique = true)]
         public string RegNumber { get; set; }
 
         public string Color { get; set; }

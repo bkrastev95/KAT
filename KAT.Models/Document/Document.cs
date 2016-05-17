@@ -10,7 +10,7 @@ namespace KAT.Models.Document
 
         public string RegNumber { get; set; }
         public byte[] Picture { get; set; }
-        public ICollection<Violation.Violation> Violations { get; set; }
+        public List<Violation.Violation> Violations { get; set; }
 
         public Policeman.Policeman Policeman { get; set; }
         public Camera.Camera Camera { get; set; }

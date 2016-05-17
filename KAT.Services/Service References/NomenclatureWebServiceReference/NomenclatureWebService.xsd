@@ -45,9 +45,16 @@
   <xs:element name="Policeman" nillable="true" type="tns:Policeman" />
   <xs:complexType name="Nomenclature">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:long" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Nomenclature" nillable="true" type="tns:Nomenclature" />
+  <xs:complexType name="ArrayOfNomenclature">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Nomenclature" nillable="true" type="tns:Nomenclature" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNomenclature" nillable="true" type="tns:ArrayOfNomenclature" />
 </xs:schema>

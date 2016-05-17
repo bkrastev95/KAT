@@ -8,6 +8,7 @@
   <xs:element name="ArrayOfCar" nillable="true" type="tns:ArrayOfCar" />
   <xs:complexType name="Car">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Brand" nillable="true" type="tns:Nomenclature" />
       <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Driver" nillable="true" type="tns:SimpleDriver" />
       <xs:element minOccurs="0" name="Id" type="xs:long" />
@@ -17,8 +18,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Car" nillable="true" type="tns:Car" />
+  <xs:complexType name="Nomenclature">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Nomenclature" nillable="true" type="tns:Nomenclature" />
   <xs:complexType name="SimpleDriver">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Egn" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:long" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
@@ -26,11 +36,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SimpleDriver" nillable="true" type="tns:SimpleDriver" />
-  <xs:complexType name="Nomenclature">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:long" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Nomenclature" nillable="true" type="tns:Nomenclature" />
 </xs:schema>

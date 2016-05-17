@@ -270,6 +270,9 @@ namespace KAT.Services.NomenclatureWebServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -282,6 +285,19 @@ namespace KAT.Services.NomenclatureWebServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
             }
         }
         
@@ -396,6 +412,18 @@ namespace KAT.Services.NomenclatureWebServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INomenclatureWebService/UpdatePoliceman", ReplyAction="http://tempuri.org/INomenclatureWebService/UpdatePolicemanResponse")]
         System.Threading.Tasks.Task<bool> UpdatePolicemanAsync(KAT.Services.NomenclatureWebServiceReference.Policeman policeman);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INomenclatureWebService/GetDocTypes", ReplyAction="http://tempuri.org/INomenclatureWebService/GetDocTypesResponse")]
+        KAT.Services.NomenclatureWebServiceReference.Nomenclature[] GetDocTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INomenclatureWebService/GetDocTypes", ReplyAction="http://tempuri.org/INomenclatureWebService/GetDocTypesResponse")]
+        System.Threading.Tasks.Task<KAT.Services.NomenclatureWebServiceReference.Nomenclature[]> GetDocTypesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INomenclatureWebService/GetRanks", ReplyAction="http://tempuri.org/INomenclatureWebService/GetRanksResponse")]
+        KAT.Services.NomenclatureWebServiceReference.Nomenclature[] GetRanks();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INomenclatureWebService/GetRanks", ReplyAction="http://tempuri.org/INomenclatureWebService/GetRanksResponse")]
+        System.Threading.Tasks.Task<KAT.Services.NomenclatureWebServiceReference.Nomenclature[]> GetRanksAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -519,6 +547,22 @@ namespace KAT.Services.NomenclatureWebServiceReference {
         
         public System.Threading.Tasks.Task<bool> UpdatePolicemanAsync(KAT.Services.NomenclatureWebServiceReference.Policeman policeman) {
             return base.Channel.UpdatePolicemanAsync(policeman);
+        }
+        
+        public KAT.Services.NomenclatureWebServiceReference.Nomenclature[] GetDocTypes() {
+            return base.Channel.GetDocTypes();
+        }
+        
+        public System.Threading.Tasks.Task<KAT.Services.NomenclatureWebServiceReference.Nomenclature[]> GetDocTypesAsync() {
+            return base.Channel.GetDocTypesAsync();
+        }
+        
+        public KAT.Services.NomenclatureWebServiceReference.Nomenclature[] GetRanks() {
+            return base.Channel.GetRanks();
+        }
+        
+        public System.Threading.Tasks.Task<KAT.Services.NomenclatureWebServiceReference.Nomenclature[]> GetRanksAsync() {
+            return base.Channel.GetRanksAsync();
         }
     }
 }

@@ -3,11 +3,108 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:KAT.Client.ViewModels.Pages"
+      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="PolicemenPage">
+	Title="Policemen">
+    <Page.DataContext>
+        <vm:PolicemenViewModel/>
+    </Page.DataContext>
+    <Page.Resources>
+        <Image x:Key="Add" Source="../../Images/AddDoc.png"/>
+    </Page.Resources>
+    
+    <Grid Margin="70,30,70,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-    <Grid>
-        <Label Content="This is policemen page!"></Label>
+        <!--Title-->
+        <TextBlock Grid.Row="0"
+                   FontSize="19"
+                   FontFamily="Colibri"
+           HorizontalAlignment="Center"
+           Text="Регистър служители"
+           TextDecorations="Underline"/>
+
+        <!--Search form-->
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,5">
+                <TextBlock Text="Име"></TextBlock>
+                <TextBox Text="{Binding SearchFullName}"
+                     controls:TextBoxHelper.ClearTextButton="True" 
+                     Width="120"
+                     Height="30"
+                     Margin="25,5,40,5"/>
+            </StackPanel>
+            <Button Content="Търси" Height="30" Margin="5,5,0,5"
+                    VerticalAlignment="Bottom"
+                    Command="{ Binding SearchPolicemanCommand }"/>
+        </StackPanel>
+        <Button Grid.Row="1" 
+                HorizontalAlignment="Right" 
+                Command="{Binding OpenEditorCommand}"
+                CommandParameter="Insert"
+                Content="{StaticResource Add}" 
+                Height="30"
+                Margin="50,5,0,5"/>
+
+        <!--List-->
+        <ListView Grid.Row="2"
+          ItemsSource="{Binding Policemen}"
+          SelectedItem="{Binding SelectedPoliceman}"
+          Name="DocumentsListView">
+            <ListView.Resources>
+                <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                <Style x:Key="ListButton" TargetType="Button">
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="39">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="../../Images/Doc.png" Grid.Column="0"/>
+                        <StackPanel Grid.Column="1" 
+                                    Orientation="Horizontal">
+                            <Label Content="{Binding Rank.Code }" FontWeight="Bold"/>
+                            <Label Content="{Binding Name }" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                            <Button Width="28" Height="28"
+                                    Style="{StaticResource ListButton}"
+                                    Command="{Binding ElementName=DocumentsListView, Path=DataContext.OpenEditorCommand}"
+                                    CommandParameter="Edit"
+                                    Visibility="{
+                                Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, 
+                                Path=IsSelected, 
+                                Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="../../Images/EditDoc.png"></ImageBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Width="28" Height="28"
+                                    Style="{StaticResource ListButton}"
+                                    Command="{Binding ElementName=DocumentsListView, Path=DataContext.DeletePolicemanCommand}"
+                                    Visibility="{
+                                Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, 
+                                Path=IsSelected, 
+                                Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="../../Images/DelDoc.png"></ImageBrush>
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
