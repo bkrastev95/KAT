@@ -426,6 +426,10 @@ namespace KAT.Client.ViewModels.Pages
             {
                 PropertyCopy.Copy(SelectedDocument, UpsertedDocument);
             }
+            else
+            {
+                UpsertedDocument = new Document();
+            }
 
             // Init violations
             if (UpsertedDocument.Violations != null)
