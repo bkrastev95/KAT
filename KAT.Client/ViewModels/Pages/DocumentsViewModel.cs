@@ -338,8 +338,9 @@ namespace KAT.Client.ViewModels.Pages
                 if (documentsService.UpdateDocument(UpsertedDocument))
                 {
                     var existingRecord = Documents.FirstOrDefault(d => d.Id == UpsertedDocument.Id);
-                    Documents.Remove(existingRecord);
-                    Documents.Add(UpsertedDocument);
+                    PropertyCopy.Copy(UpsertedDocument, existingRecord);
+                    //Documents.Remove(existingRecord);
+                    //Documents.Add(UpsertedDocument);
                     
                     Messenger.ShowMessage("Успешна редакция", MessageType.Success);
                 }
