@@ -262,6 +262,12 @@ namespace KAT.Data.Services
                         return true;
                     }
 
+                    if (updatePoliceman.Rank != null)
+                    {
+                        context.Ranks.Attach(updatePoliceman.Rank);
+                        docInDb.Rank = updatePoliceman.Rank;
+                    }
+
                     context.Entry(docInDb).CurrentValues.SetValues(updatePoliceman);
                     context.Entry(docInDb).State = EntityState.Modified;
 

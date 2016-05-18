@@ -31,7 +31,7 @@ namespace KAT.Client.ViewModels.Pages
         private List<Nomenclature> ranks;
         private Policeman selectedPoliceman;
         private Policeman upsertedPoliceman;
-        private string searchRegNumber;
+        private bool? shouldBeActive;
         private string searchFullName;
         private readonly INomenclatureService nomenclatureService;
 
@@ -39,27 +39,13 @@ namespace KAT.Client.ViewModels.Pages
         {
             nomenclatureService = NinjectConfig.Kernel.Get<INomenclatureService>();
             Policemen = new ObservableCollection<Policeman>(nomenclatureService.GetPolicemen());
-            Ranks = new List<Nomenclature>
-            {
-                new Nomenclature
-                {
-                    Code = "Офицер",
-                    Id = 1
-                },
-                new Nomenclature
-                {
-                    Code = "Сержант",
-                    Id = 2
-                }
-            };
-
-            GetPolicemanCommand = new RelayCommand(GetPoliceman);
+            SearchPolicemanCommand = new RelayCommand(SearchPolicemen);
             InsertPolicemanCommand = new RelayCommand(InsertPoliceman);
             UpdatePolicemanCommand = new RelayCommand(UpdatePoliceman);
             DeletePolicemanCommand = new RelayCommand(DeletePoliceman);
             OpenEditorCommand = new RelayCommand(OpenEditor);
 
-            SearchRegNumber = string.Empty;
+            ShouldBeActive = true;
             SearchFullName = string.Empty;
         }
 
@@ -169,12 +155,12 @@ namespace KAT.Client.ViewModels.Pages
             }
         }
         
-        public string SearchRegNumber
+        public bool? ShouldBeActive
         {
-            get { return searchRegNumber; }
+            get { return shouldBeActive; }
             set
             {
-                searchRegNumber = value;
+                shouldBeActive = value;
                 NotifyPropertyChanged();
             }
         }
@@ -193,9 +179,13 @@ namespace KAT.Client.ViewModels.Pages
 
         #region Methods
 
-        private void GetPoliceman(object obj)
+        private void SearchPolicemen(object obj)
         {
-            
+            var result = nomenclatureService.GetPolicemen().Where(p =>
+                (SearchFullName == string.Empty || p.Name.Contains(SearchFullName))
+                && (ShouldBeActive == null || p.IsActive == ShouldBeActive)).ToList();
+            Policemen = new ObservableCollection<Policeman>();
+            result.ForEach(r => Policemen.Add(r));
         }
 
         private void InsertPoliceman(object obj)

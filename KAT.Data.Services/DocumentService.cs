@@ -95,68 +95,69 @@ namespace KAT.Data.Services
 
                 using (var context = new KatDataContext())
                 {
-                    //var result = context.Documents.Where(d => d.RegNumber == updateDocument.RegNumber).ToList();
-                    //if (result.Count != 1)
-                    //{
-                    //    return false;
-                    //}
-
-                    //var recordToUpdate = result.FirstOrDefault();
-
-                    //// Attach props:
-                    //if (updateDocument.Driver != null)
-                    //{
-                    //    updateDocument.Driver.Cars = context.Cars.ToList().FindAll(c => c.Driver.Id == updateDocument.Driver.Id).ToList();
-                    //    context.Drivers.Attach(updateDocument.Driver);
-                    //    recordToUpdate.Driver = updateDocument.Driver;
-                    //}
-
-                    //if (updateDocument.Violations != null && updateDocument.Violations.Any())
-                    //{
-                    //    updateDocument.Violations.ToList().ForEach(v => context.Violations.Attach(v));
-                    //    recordToUpdate.Violations = new List<CodeFirstModels.Nomenclatures.Violation>();
-                    //    updateDocument.Violations.ToList().ForEach(v => recordToUpdate.Violations.Add(v));
-                    //}
-
-                    //if (updateDocument.Camera != null)
-                    //{
-                    //    context.Cameras.Attach(updateDocument.Camera);
-                    //    recordToUpdate.Camera = updateDocument.Camera;
-                    //}
-
-                    //if (updateDocument.Policeman != null)
-                    //{
-                    //    context.Policemеn.Attach(updateDocument.Policeman);
-                    //    recordToUpdate.Policeman = updateDocument.Policeman;
-                    //}
-
-                    //if (updateDocument.DocumentType != null)
-                    //{
-                    //    context.DocumentTypes.Attach(updateDocument.DocumentType);
-                    //    recordToUpdate.DocumentType = updateDocument.DocumentType;
-                    //}
-
-                    //if (updateDocument.Picture != null)
-                    //{
-                    //    recordToUpdate.Picture = updateDocument.Picture;
-                    //}
-
-                    //recordToUpdate.Id = updateDocument.Id;
-                    //recordToUpdate.RegNumber = updateDocument.RegNumber;
-
-                    var docInDb = context.Documents.Find(updateDocument.Id);
-
-                    // Activity does not exist in database and it's new one
-                    if (docInDb == null)
+                    var result = context.Documents.Where(d => d.RegNumber == updateDocument.RegNumber).ToList();
+                    if (result.Count != 1)
                     {
-                        context.Documents.Add(updateDocument);
-                        context.SaveChanges();
-                        return true;
+                        return false;
                     }
 
-                    // Activity already exist in database and modify it
-                    context.Entry(docInDb).CurrentValues.SetValues(updateDocument);
-                    context.Entry(docInDb).State = EntityState.Modified;
+                    var recordToUpdate = result.FirstOrDefault();
+
+                    // Attach props:
+                    if (updateDocument.Driver != null)
+                    {
+                        // context.Cars.ToList().FindAll(c => c.Driver.Id == updateDocument.Driver.Id).ToList()
+                        updateDocument.Driver.Cars = null;
+                        context.Drivers.Attach(updateDocument.Driver);
+                        recordToUpdate.Driver = updateDocument.Driver;
+                    }
+
+                    if (updateDocument.Violations != null && updateDocument.Violations.Any())
+                    {
+                        updateDocument.Violations.ToList().ForEach(v => context.Violations.Attach(v));
+                        recordToUpdate.Violations = new List<CodeFirstModels.Nomenclatures.Violation>();
+                        updateDocument.Violations.ToList().ForEach(v => recordToUpdate.Violations.Add(v));
+                    }
+
+                    if (updateDocument.Camera != null)
+                    {
+                        context.Cameras.Attach(updateDocument.Camera);
+                        recordToUpdate.Camera = updateDocument.Camera;
+                    }
+
+                    if (updateDocument.Policeman != null)
+                    {
+                        context.Policemеn.Attach(updateDocument.Policeman);
+                        recordToUpdate.Policeman = updateDocument.Policeman;
+                    }
+
+                    if (updateDocument.DocumentType != null)
+                    {
+                        context.DocumentTypes.Attach(updateDocument.DocumentType);
+                        recordToUpdate.DocumentType = updateDocument.DocumentType;
+                    }
+
+                    if (updateDocument.Picture != null)
+                    {
+                        recordToUpdate.Picture = updateDocument.Picture;
+                    }
+
+                    recordToUpdate.Id = updateDocument.Id;
+                    recordToUpdate.RegNumber = updateDocument.RegNumber;
+
+                    //var docInDb = context.Documents.Find(updateDocument.Id);
+
+                    //// Activity does not exist in database and it's new one
+                    //if (docInDb == null)
+                    //{
+                    //    context.Documents.Add(updateDocument);
+                    //    context.SaveChanges();
+                    //    return true;
+                    //}
+
+                    //// Activity already exist in database and modify it
+                    //context.Entry(docInDb).CurrentValues.SetValues(updateDocument);
+                    //context.Entry(docInDb).State = EntityState.Modified;
 
 
                     context.SaveChanges();

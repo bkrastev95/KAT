@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -13,12 +15,12 @@ namespace KAT.Client.ViewModels.Pages
 {
     public class DriversViewModel : INotifyPropertyChanged
     {
-        private ICommand getDriversCommand;
         private ICommand insertDriverCommand;
         private ICommand updateDriverCommand;
         private ICommand deleteDriverCommand;
+        private ICommand searchDriverCommand;
         private ICommand openEditorCommand;
-        private List<Driver> drivers;
+        private ObservableCollection<Driver> drivers;
         private Driver selectedDriver;
         private Driver updatedDriver;
         private Driver insertedDriver;
@@ -29,9 +31,9 @@ namespace KAT.Client.ViewModels.Pages
         public DriversViewModel()
         {
             driversService = NinjectConfig.Kernel.Get<IDriversService>();
-            Drivers = driversService.GetDrivers();
+            Drivers = new ObservableCollection<Driver>(driversService.GetDrivers());
 
-            GetDriversCommand = new RelayCommand(GetDrivers);
+            SearchDriverCommand = new RelayCommand(SearchDrivers);
             InsertDriverCommand = new RelayCommand(InsertDriver);
             UpdateDriverCommand = new RelayCommand(UpdateDriver);
             DeleteDriverCommand = new RelayCommand(DeleteDriver);
@@ -45,16 +47,6 @@ namespace KAT.Client.ViewModels.Pages
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Commands
-        public ICommand GetDriversCommand
-        {
-            get { return getDriversCommand; }
-            set
-            {
-                getDriversCommand = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         public ICommand InsertDriverCommand
         {
             get { return insertDriverCommand; }
@@ -85,6 +77,17 @@ namespace KAT.Client.ViewModels.Pages
             }
         }
 
+        public ICommand SearchDriverCommand
+        {
+            get { return searchDriverCommand; }
+            set
+            {
+                searchDriverCommand = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public ICommand OpenEditorCommand
         {
             get { return openEditorCommand; }
@@ -96,7 +99,7 @@ namespace KAT.Client.ViewModels.Pages
         }
 
         // Bindings
-        public List<Driver> Drivers
+        public ObservableCollection<Driver> Drivers
         {
             get { return drivers; }
             set
@@ -160,9 +163,13 @@ namespace KAT.Client.ViewModels.Pages
 
         #region Methods
 
-        private void GetDrivers(object obj)
+        private void SearchDrivers(object obj)
         {
-            
+            var result = driversService.GetDrivers().Where(d =>
+                (SearchEgn == string.Empty || d.Egn.Contains(SearchEgn))
+                && (SearchFullName == string.Empty || d.FullName.Contains(SearchFullName))).ToList();
+            Drivers = new ObservableCollection<Driver>();
+            result.ForEach(r => Drivers.Add(r));
         }
 
         private void InsertDriver(object obj)

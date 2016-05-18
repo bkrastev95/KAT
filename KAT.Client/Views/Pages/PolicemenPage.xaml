@@ -6,7 +6,7 @@
       xmlns:vm="clr-namespace:KAT.Client.ViewModels.Pages"
       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="500" d:DesignWidth="800"
 	Title="Policemen">
     <Page.DataContext>
         <vm:PolicemenViewModel/>
@@ -40,7 +40,17 @@
                      Height="30"
                      Margin="25,5,40,5"/>
             </StackPanel>
-            <Button Content="Търси" Height="30" Margin="5,5,0,5"
+            <StackPanel Orientation="Vertical" Margin="0,0,0,5">
+                <TextBlock Text="Действащ:"></TextBlock>
+                <controls:ToggleSwitch
+                Margin="0,0,0,5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsChecked="{ Binding ShouldBeActive }"
+                OnLabel="Да"
+                OffLabel="Не"/>
+            </StackPanel>
+            <Button Content="Търси" Height="30" Margin="35,5,0,5"
                     VerticalAlignment="Bottom"
                     Command="{ Binding SearchPolicemanCommand }"/>
         </StackPanel>

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:vm="clr-namespace:KAT.Client.ViewModels.Pages"
+      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="400"
 	Title="Начало">
@@ -37,7 +38,7 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
         <DockPanel Grid.Row="2" Grid.Column="0">
-            <StackPanel Orientation="Vertical" DockPanel.Dock="Left"
+            <StackPanel Orientation="Vertical" MinWidth="120" DockPanel.Dock="Left"
                         VerticalAlignment="Bottom"
                         Margin="20,0,0,10">
                 <TextBlock Text="Регистрационен номер:"
@@ -46,7 +47,20 @@
                            FontWeight="Bold"
                            Foreground="Blue"
                            HorizontalAlignment="Left"/>
-                <TextBox Text="{Binding SearchRegNumber }" ></TextBox>
+                <TextBox Text="{Binding SearchRegNumber }" 
+                         controls:TextBoxHelper.ClearTextButton="True" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical"  MinWidth="120" DockPanel.Dock="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="20,0,0,10">
+                <TextBlock Text="Марка:"
+                           Margin="0,0,0,5"
+                           FontSize="13"
+                           FontWeight="Bold"
+                           Foreground="Blue"
+                           HorizontalAlignment="Left"/>
+                <TextBox Text="{Binding SearchBrandName }" 
+                         controls:TextBoxHelper.ClearTextButton="True"/>
             </StackPanel>
             <Button Content="Филтър"
                     HorizontalAlignment="Right"

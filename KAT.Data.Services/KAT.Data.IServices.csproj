@@ -47,10 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KAT.Models\KAT.Models.csproj">
-      <Project>{1E134C4E-4D94-4520-B10C-5AAC5E497D8F}</Project>
-      <Name>KAT.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KAT.Web.Models\KAT.Web.Models.csproj">
       <Project>{097b4473-e50d-4a58-a155-a9b1a97271ef}</Project>
       <Name>KAT.Web.Models</Name>

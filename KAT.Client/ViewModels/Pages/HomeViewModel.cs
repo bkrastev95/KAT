@@ -18,6 +18,7 @@ namespace KAT.Client.ViewModels.Pages
     public class HomeViewModel : INotifyPropertyChanged
     {
         private string searchRegNumber;
+        private string searchBrandName;
         private bool isSelected;
         private ICommand searchCarCommand;
         private ObservableCollection<Car> cars;
@@ -29,6 +30,7 @@ namespace KAT.Client.ViewModels.Pages
             carsService = NinjectConfig.Kernel.Get<ICarsService>();
             Cars = new ObservableCollection<Car>(carsService.GetCars());
             SearchRegNumber = string.Empty;
+            SearchBrandName = string.Empty;
 
             SearchCarCommand = new RelayCommand(SearchCar);
         }
@@ -76,6 +78,16 @@ namespace KAT.Client.ViewModels.Pages
             }
         }
 
+        public string SearchBrandName
+        {
+            get { return searchBrandName; }
+            set
+            {
+                searchBrandName = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public ICommand SearchCarCommand
         {
             get { return searchCarCommand; }
@@ -93,10 +105,10 @@ namespace KAT.Client.ViewModels.Pages
         private void SearchCar(object obj)
         {
             var result = carsService.GetCars().Where(c =>
-                (SearchRegNumber == string.Empty || c.RegNumber.Contains(SearchRegNumber))).ToList();
+                (SearchRegNumber == string.Empty || c.RegNumber.Contains(SearchRegNumber))
+                && (SearchBrandName == string.Empty || c.Brand.Name.Contains(SearchBrandName))).ToList();
             Cars = new ObservableCollection<Car>();
             result.ForEach(r => Cars.Add(r));
-
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propName = "")

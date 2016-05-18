@@ -52,7 +52,7 @@
             </StackPanel>
             <Button Content="Търси" Height="30" Margin="5,5,0,5"
                     VerticalAlignment="Bottom"
-                    Command="{ Binding GetDriversCommand }"/>
+                    Command="{ Binding SearchDriverCommand }"/>
         </StackPanel>
         <Button Grid.Row="1" 
                 HorizontalAlignment="Right" 
